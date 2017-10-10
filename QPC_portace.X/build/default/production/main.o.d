@@ -17,5 +17,6 @@ mcc_generated_files/traps.h  \
 ../include/qassert.h  \
  ../include/qs_dummy.h  \
 ../bsp/bsp.h  \
-../qep/Blinky.h  \
-../bsp/bsp.h 
+Blinking/Blinky.h  \
+ Blinking/../../bsp/bsp.h  \
+Blinking/../../include/qp_port.h 

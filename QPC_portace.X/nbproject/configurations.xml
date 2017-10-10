@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="62">
   <logicalFolder name="root" displayName="root" projectFiles="true">
-    <logicalFolder name="f1" displayName="Blinky" projectFiles="true">
-      <itemPath>../qep/Blinky.c</itemPath>
-      <itemPath>../qep/Blinky.h</itemPath>
+    <logicalFolder name="Blinking" displayName="Blinking" projectFiles="true">
+      <itemPath>Blinking/Blinky.c</itemPath>
+      <itemPath>Blinking/Blinky.h</itemPath>
     </logicalFolder>
     <logicalFolder name="bsp" displayName="bsp" projectFiles="true">
       <itemPath>../bsp/bsp.c</itemPath>
@@ -20,10 +20,6 @@
         <itemPath>mcc_generated_files/pin_manager.h</itemPath>
         <itemPath>mcc_generated_files/traps.h</itemPath>
       </logicalFolder>
-    </logicalFolder>
-    <logicalFolder name="f2" displayName="LDD" projectFiles="true">
-      <itemPath>../qep/LDD_BSP.c</itemPath>
-      <itemPath>../qep/LDD_BSP.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -120,6 +116,9 @@
     <Elem>../qf</Elem>
     <Elem>../port</Elem>
     <Elem>../bsp</Elem>
+    <Elem>Blinky</Elem>
+    <Elem>Display</Elem>
+    <Elem>Blinking</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -158,6 +157,10 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="Blinking/Blinky.c" ex="true" overriding="false">
+      </item>
+      <item path="Blinking/Blinky.h" ex="true" overriding="false">
+      </item>
       <C30>
         <property key="code-model" value="large-code"/>
         <property key="const-model" value="default"/>

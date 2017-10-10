@@ -32,42 +32,70 @@
 #define	XC_HEADER_TEMPLATE_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
-#include "bsp.h"
+#include <string.h>
+#include <stdint.h>
 #include "qp_port.h"
+#include "LDD_BSP.h"
+#include "../bsp/bsp.h"
 
+#define DARK_TIMEOUT    20
+#define NSCRATCH        5
 
-typedef struct Blinky Blinky;
-typedef enum BlinkySig BlinkySig;
+/* Data types */
+typedef enum LEDDD_State LEDDD_State;
+typedef struct DisplayDigit DisplayDigit;
+typedef struct DisplayDriver DisplayDriver;
+typedef struct DisplayEvent DisplayEvent;
+typedef struct DisplayDigitValue DisplayDigitValue;
+typedef enum DisplaySignal DisplaySignal;
 
-
-struct Blinky
-{
-    QActive super;
-    QTimeEvt timeEvt;
-    int countTimer;
+struct DisplayDriver {
+   QActive super;
+   QTimeEvt timeTickEvent;
+   QTimeEvt timeBlickEvent;
+   DisplayDigitValue digitvalue;
+   uint8_t DarkTime;
+   void *general;
 };
 
-enum BlinkySig
-{
-    DUMMY_SIG       = Q_USER_SIG,
-    TIME_OUT_SIG    = Q_USER_SIG + 1,
-    MAX_SIG         = Q_USER_SIG + 10
+struct DisplayDigitValue {
+    char ones;
+    char tens;
+    char hundreds;
+    char thousands;
 };
 
+struct DisplayEvent {
+    QEvt super;
+    uint16_t value;
+};
 
-extern Blinky *AO_Blinky;
-void BlinkyCtor(void);
+enum DisplaySignal {
+    LDD_DUMMY_SIG       = Q_USER_SIG + 0,
+    LDD_MPX_TICK        = Q_USER_SIG + 1,
+    LDD_BLICKING_ON     = Q_USER_SIG + 2,
+    LDD_BLICKING_OFF    = Q_USER_SIG + 3, 
+    LDD_BLICK_TMOUT     = Q_USER_SIG + 4,
+    LDD_ON_SIG          = Q_USER_SIG + 5,
+    LDD_OFF_SIG         = Q_USER_SIG + 6,
+    LDD_NEW_VAL_SIG     = Q_USER_SIG + 7,
+};
 
-#ifdef	__cplusplus
-extern "C" {
-#endif /* __cplusplus */
+enum LEDDD_State {
+    LEDDD_OK = 0,
+    LEDD_FALSE = -1
+};
 
-    // TODO If C++ is being used, regular C code needs function names to have C 
-    // linkage so the functions can be used by the c code. 
+/*..............................................................................
+ * 
+ * Public variables
+ */
+extern QActive *AO_LEDDisplay;
 
-#ifdef	__cplusplus
-}
-#endif /* __cplusplus */
-
+/*..............................................................................
+*
+* Function prototypes 
+*/
+void DisplayCtor(void);
 #endif	/* XC_HEADER_TEMPLATE_H */
 

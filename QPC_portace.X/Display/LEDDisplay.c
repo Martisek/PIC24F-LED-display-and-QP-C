@@ -6,7 +6,7 @@
  * Created on March 9, 2017, 3:19 PM
  */
 
-#include "LDD_BSP.h"
+#include "LEDDisplay.h"
 
 
 #define MYDEBUG   1
@@ -59,9 +59,9 @@ static void Double_dabble(DisplayDriver *me, uint16_t binvalue);
 /**========================================================================================**/
 void DisplayCtor(void) {
     DisplayDriver *me = &LEDDisplay;
+    QActive_ctor(&me->super, Q_STATE_CAST(&Display_Init));/* superclass ctor */
     QTimeEvt_ctor(&me->timeTickEvent, LDD_MPX_TICK);
     QTimeEvt_ctor(&me->timeBlickEvent, LDD_BLICK_TMOUT);
-    QFsm_ctor(&me->state, Q_STATE_CAST(&DisplayInit));/* superclass ctor */
     return;
 }
 
@@ -85,7 +85,7 @@ static QState Display_Active(DisplayDriver *me, QEvt const *e) {
     
     switch (e->sig) {
         case Q_ENTRY_SIG: {
-            QTimeEvt_postEvery(&me->timeEvent, &me->super, BSP_TICKS_PER_SEC/50);
+            QTimeEvt_postEvery(&me->timeTickEvent, &me->super, BSP_TICKS_PER_SEC/50);
             state = Q_HANDLED();
             break;
         }
@@ -156,7 +156,11 @@ static QState Display_SegOnes(DisplayDriver *me, QEvt const *e) {
         case LDD_MPX_TICK: {
             state = Q_TRAN(&Display_SegTens);
             break;
-        }    
+        } 
+        default: {
+            state = Q_SUPER(&Display_Active);
+            break;
+        }
     }
     return state;
 }
@@ -178,7 +182,7 @@ static QState Display_SegTens(DisplayDriver *me, QEvt const *e) {
             LEDDAnodeTens();
             state = Q_HANDLED();
             break;
-            }
+        }
         case Q_EXIT_SIG: {
             #ifdef MYDEBUG
                 strcpy(DebugInfoString, SegOnesExitString);
@@ -190,36 +194,40 @@ static QState Display_SegTens(DisplayDriver *me, QEvt const *e) {
             me->DarkTime = DARK_TIMEOUT;
             state = Q_HANDLED();
             break;
-            }
+        }
         case LDD_MPX_TICK: {
             state = Q_TRAN(&Display_SegHundreds);
             break;
-        }    
+        }
+        default: {
+            state = Q_SUPER(&Display_Active);
+            break;
+        }
     }
     return state;
 }
 
 /*..............................................................................
  * 
- * Led display tens segment function handler
+ * Led display hundreds segment function handler
  * 
  */ 
-static QState Display_SegTens(DisplayDriver *me, QEvt const *e) {
+static QState Display_SegHundreds(DisplayDriver *me, QEvt const *e) {
     QState state;
     
     switch (e->sig) {
         case Q_ENTRY_SIG: {
             #ifdef MYDEBUG
-                strcpy(DebugInfoString, SegTensEnterString);
+                strcpy(DebugInfoString, SegHunsEnterString);
             #endif
-            (void)LDD_Char2SegmentConvert(((DisplayDriver*)me)->digitvalue.tens);
-            LEDDAnodeTens();
+            (void)LDD_Char2SegmentConvert(((DisplayDriver*)me)->digitvalue.hundreds);
+            LEDDAnodeHundreds();
             state = Q_HANDLED();
             break;
-            }
+        }
         case Q_EXIT_SIG: {
             #ifdef MYDEBUG
-                strcpy(DebugInfoString, SegOnesExitString);
+                strcpy(DebugInfoString, SegHunsExitString);
             #endif
             LEDDLightOFF();
             while (me->DarkTime > 0)
@@ -228,56 +236,126 @@ static QState Display_SegTens(DisplayDriver *me, QEvt const *e) {
             me->DarkTime = DARK_TIMEOUT;
             state = Q_HANDLED();
             break;
-            }
+        }
         case LDD_MPX_TICK: {
-            state = Q_TRAN(&Display_SegHundreds);
+            state = Q_TRAN(&Display_SegThousands);
             break;
-        }    
+        } 
+        default: {
+            state = Q_SUPER(&Display_Active);
+            break;
+        }
     }
     return state;
 }
 
-/* Hundreds digit */
-QState DisplaySegHundreds(DisplayDriver *me, QEvent const *e)
-{
+/*..............................................................................
+ * 
+ * Led display thousands segment function handler
+ * 
+ */ 
+static QState Display_SegThousands(DisplayDriver *me, QEvt const *e) {
+    QState state;
+    
     switch (e->sig)
     {
-        case Q_ENTRY_SIG:
-            {
-                #ifdef MYDEBUG
-                    strcpy(DebugInfoString, SegHunsEnterString);
-                #endif
-                (void)LDD_Char2SegmentConvert(((DisplayDriver*)me)->digitvalue.hundreds);
-                LEDDAnodeHundreds();
+        case Q_ENTRY_SIG: {
+            #ifdef MYDEBUG
+                strcpy(DebugInfoString, SegThosEnterString);
+            #endif
+            (void)LDD_Char2SegmentConvert(((DisplayDriver*)me)->digitvalue.thousands);
+            LEDDAnodeThousands();
+            state = Q_HANDLED();
+            break;
+        }
+        case Q_EXIT_SIG: {
+            #ifdef MYDEBUG
+                strcpy(DebugInfoString, SegThosExitString);
+            #endif
+            LEDDLightOFF();
+            while (me->DarkTime > 0)
+                --me->DarkTime;
 
-                return Q_HANDLED();
-            }
-        case Q_EXIT_SIG:
-            {
-                #ifdef MYDEBUG
-                    strcpy(DebugInfoString, SegHunsExitString);
-                #endif
-                LEDDLightOFF();
-                while (me->DarkTime > 0)
-                    --me->DarkTime;
-
-                me->DarkTime = DARK_TIMEOUT;
-                return Q_HANDLED();
-
-            }
-        case DARK:
-            {
-                return Q_TRAN(&DisplayOFF);
-            }
-        case TICK:
-            {
-                return Q_TRAN(&DisplaySegThousands);
-            }
+            me->DarkTime = DARK_TIMEOUT;
+            state = Q_HANDLED();
+            break;
+        }
+        case LDD_MPX_TICK: {
+            state = Q_TRAN(&Display_SegOnes);
+            break;
+        } 
+        default: {
+            state = Q_SUPER(&Display_Active);
+            break;
+        }
+   
     }
     return Q_IGNORED();
 }
 
-/**========================================================================================**/
+/*..............................................................................
+ * 
+ * Led display blicking function handler
+ * 
+ */ 
+static QState Display_Paused(DisplayDriver *me, QEvt const *e) {
+    QState state;
+    
+    switch (e->sig) {
+        case Q_ENTRY_SIG: {
+            QTimeEvt_postEvery(&me->timeBlickEvent, &me->super, BSP_TICKS_PER_SEC);
+            LEDDLightOFF();
+            me->DarkTime = DARK_TIMEOUT;
+            state = Q_HANDLED();
+            break;
+        }
+        case Q_EXIT_SIG: {
+            state = Q_HANDLED();
+            break;
+        }
+        case LDD_BLICK_TMOUT: {
+            state = Q_TRAN(&Display_SegOnes);
+            break;
+        }
+        default: {
+            state = Q_SUPER(&Display_Active);
+            break;
+        }
+    }
+    return state;
+}
+
+/*..............................................................................
+ * 
+ * LED display OFF state
+ * 
+ */ 
+static QState Display_OFF(DisplayDriver *me, QEvt const *e) {
+    QState state;
+    
+    switch (e->sig) {
+        case Q_ENTRY_SIG: {
+            LEDDLightOFF();
+            state = Q_HANDLED();
+            break;
+        }
+        case Q_EXIT_SIG: {
+            state = Q_HANDLED();
+            break;
+        }
+        case LDD_ON_SIG: {
+            state = Q_TRAN(&Display_Active);
+            break;
+        }
+        default: {
+            state = Q_SUPER(&QHsm_top);
+            break;
+        }
+    }
+    return state;
+}
+
+/**==========================================================================**/
 
 /* Algorithm for BIN to BCD conversion */
 void Double_dabble(DisplayDriver *me, uint16_t binvalue)
@@ -364,6 +442,7 @@ LEDDD_State LDD_Char2SegmentConvert(char value)
                     return LEDD_FALSE;
     }
 }
+
 
 
 

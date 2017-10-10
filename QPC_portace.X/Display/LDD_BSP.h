@@ -32,20 +32,8 @@
 #define	XC_HEADER_TEMPLATE_H
 
 #include <xc.h>     // include processor files - each processor file is guarded.  
-#include <string.h>
-#include <stdint.h>
-#include "qp_port.h"
-#include "../bsp/bsp.h"
 
-#ifdef	__cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-    #define DARK_TIMEOUT    20
-    #define DEBUG           1
-    #define NSCRATCH        5
-
-    /* Constants for GPIO ports manipulation */
+/* Constants for GPIO ports manipulation */
 
     #define LDD_MASK_0_PC   ~0x000E
     #define LDD_MASK_1_PC   ~0x0004
@@ -76,52 +64,6 @@ extern "C" {
     #define LDD_MASK_DARK_PC ~0xFFC1
     #define LDD_MASK_DARK_PA ~0xFE73
     #define LDD_MASK_DARK_PB ~0x57FF
-
-    /*========================================================================*/
-    /* Data types */
-    typedef enum LEDDD_State LEDDD_State;
-    typedef struct DisplayDigit DisplayDigit;
-    typedef struct DisplayDriver DisplayDriver;
-    typedef struct DisplayEvent DisplayEvent;
-    typedef struct DisplayDigitValue DisplayDigitValue;
-    typedef enum DisplaySignal DisplaySignal;
-    
-     struct DisplayDriver {
-        QActive super;
-        QTimeEvt timeTickEvent;
-        QTimeEvt timeBlickEvent;
-        DisplayDigitValue digitvalue;
-        uint8_t DarkTime;
-        void *general;
-    };
-    
-    struct DisplayDigitValue {
-        char ones;
-        char tens;
-        char hundreds;
-        char thousands;
-    };
-
-    struct DisplayEvent {
-        QEvt super;
-        uint16_t value;
-    };
-
-    enum DisplaySignal {
-        LDD_DUMMY_SIG       = Q_USER_SIG + 0,
-        LDD_MPX_TICK        = Q_USER_SIG + 1,
-        LDD_BLICKING_ON     = Q_USER_SIG + 2,
-        LDD_BLICKING_OFF    = Q_USER_SIG + 3, 
-        LDD_BLICK_TMOUT     = Q_USER_SIG + 4,
-        LDD_ON_SIG          = Q_USER_SIG + 5,
-        LDD_OFF_SIG         = Q_USER_SIG + 6,
-        LDD_NEW_VAL_SIG     = Q_USER_SIG + 7,
-    };
-    
-    enum LEDDD_State {
-        LEDDD_OK = 0,
-        LEDD_FALSE = -1
-    };
     
     /*..........................................................................
      * Function-like macros 
@@ -202,12 +144,8 @@ extern "C" {
 
    
     /*========================================================================*/
-    /* Function prototypes */
-    void DisplayCtor(DisplayDriver *me);
+   
   
-#ifdef	__cplusplus
-}
-#endif /* __cplusplus */
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
