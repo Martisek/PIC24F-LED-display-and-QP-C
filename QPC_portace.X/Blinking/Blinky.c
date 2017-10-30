@@ -1,14 +1,15 @@
-/******************************************************************************/
-/**
+/*******************************************************************************
+ *
+ * @file
  * 
+ * @author
  * 
- * 
- * 
- * 
+ * @date
  * 
  */
 
 #include "Blinky.h"
+#include <string.h>
 
 
 void BlinkyCtor(void);
@@ -17,7 +18,9 @@ static QState Blinky_On(Blinky *me, QEvt const *e);
 static QState Blinky_Off(Blinky *me, QEvt const *e);
 
 static Blinky blinkyObject;
-Blinky *AO_Blinky = &blinkyObject;
+QActive *AO_Blinky = &blinkyObject.super;
+
+char BlinkyDebugString[20];
 
 void BlinkyCtor(void) {
     Blinky *me = &blinkyObject;
@@ -39,6 +42,7 @@ static QState Blinky_On(Blinky *me, QEvt const *e)
 
     switch(e->sig){
         case Q_ENTRY_SIG: {
+            strcpy(BlinkyDebugString, "Blinky ON enter");
             me->countTimer = 10;
             LED_ON();
             state = Q_HANDLED();
@@ -46,11 +50,13 @@ static QState Blinky_On(Blinky *me, QEvt const *e)
         }
 
         case Q_EXIT_SIG: {
+            strcpy(BlinkyDebugString, "Blinky ON exit");
             state = Q_HANDLED();
             break;
         }
 
         case TIME_OUT_SIG: {
+            strcpy(BlinkyDebugString, "Blinky ON tick");
             me->countTimer--;
             if (me->countTimer == 0)
                 state = Q_TRAN(&Blinky_Off);
@@ -73,6 +79,7 @@ static QState Blinky_Off(Blinky *me, QEvt const *e)
 
     switch(e->sig){
         case Q_ENTRY_SIG: {
+            strcpy(BlinkyDebugString, "Blinky OFF enter");
             me->countTimer = 10;
             LED_OFF();
             state = Q_HANDLED();
@@ -80,11 +87,13 @@ static QState Blinky_Off(Blinky *me, QEvt const *e)
         }
 
         case Q_EXIT_SIG: {
+            strcpy(BlinkyDebugString, "Blinky OFF exit");
             state = Q_HANDLED();
             break;
         }
 
         case TIME_OUT_SIG: {
+            strcpy(BlinkyDebugString, "Blinky OFF tick");
             me->countTimer--;
             if (me->countTimer == 0)
                 state = Q_TRAN(&Blinky_On);

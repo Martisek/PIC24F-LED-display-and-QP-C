@@ -45,31 +45,41 @@
 
 #include <xc.h>
 #include "mcc_generated_files/mcc.h"
-#include "qp_port.h"
-#include "../bsp/bsp.h"
 #include "Blinking/Blinky.h"
-
+#include "../bsp/bsp.h"
+#include "Display/LEDDisplay.h"
+#include "qp_port.h"
 /*
                          Main application
+ * 
+ *
  */
+
+extern QActive *AO_LEDDisplay;
+
+/*..............................................................................
+*
+* Function prototypes 
+*/
+void DisplayCtor(void);
 int main(void)
 {
-    QEvt *blinkySto[10];
+    static const QEvt *blinkySto[10];
+    static const QEvt *displaySto[10];
+    
     
     // initialize the device
     SYSTEM_Initialize();
     BSP_init();
     BlinkyCtor();
+    DisplayCtor();
+    
     QF_init();
     
-    QActive_start(AO_Blinky, 1U, blinkySto, Q_DIM(blinkySto), (void*)0, 0U, (QEvt*)0);
+    QActive_start(AO_Blinky,     1U, blinkySto,  Q_DIM(blinkySto),  (void*)0, 0U, (QEvt*)0);
+    QActive_start(AO_LEDDisplay, 3U, displaySto, Q_DIM(displaySto), (void*)0, 0U, (QEvt*)0);
     
     QF_run();
-
-    while (1)
-    {
-        // Add your application code
-    }
 
     return -1;
 }

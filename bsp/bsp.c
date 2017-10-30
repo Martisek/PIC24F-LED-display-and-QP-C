@@ -69,7 +69,7 @@ void  __attribute__((__interrupt__, auto_psv)) _T2Interrupt(void) {
 #ifdef Q_SPY
     l_tickTime += BSP_TMR2_PERIOD;             /* account for TMR2 overflow */
 #endif
-    LED_TOGGLE();  
+   
     QF_TICK(&l_T2Interrupt);          /* handle all armed time events in QF */
 }
 
@@ -120,7 +120,7 @@ void Q_onAssert(char const Q_ROM * const Q_ROM_VAR file, int line) {
 
 /*..........................................................................*/
 void QF_onStartup(void) {                 /* entered with interrupts locked */
-    T2CON = 0x0020U;  /* Use Internal Osc (Fcy), 16 bit mode, prescaler = 1 */
+    T2CON = 0x0000U;  /* Use Internal Osc (Fcy), 16 bit mode, prescaler = 1 */
     TMR2  = 0x0000U; /* Start counting from 0 and clear the prescaler count */
     PR2   = (uint16_t)(BSP_TMR2_PERIOD - 1U);              /* Timer2 period */
     _T2IP = TIMER2_ISR_PRIO;              /* set Timer 2 interrupt priority */

@@ -13,12 +13,11 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - pic24-dspic-pic32mm : v1.25
+        Product Revision  :  MPLAB(c) Code Configurator - pic24-dspic-pic32mm : v1.35
         Device            :  PIC24FJ128GA204
-        Driver Version    :  1.02
     The generated drivers are tested against the following:
-        Compiler          :  XC16 1.26
-        MPLAB             :  MPLAB X 3.45
+        Compiler          :  XC16 1.31
+        MPLAB             :  MPLAB X 3.60
 */
 
 /*
@@ -57,7 +56,7 @@
 
 // CONFIG3
 #pragma config WPFP = WPFP127    // Write Protection Flash Page Segment Boundary->Page 127 (0x1FC00)
-#pragma config SOSCSEL = ON    // SOSC Selection bits->SOSC circuit selected
+#pragma config SOSCSEL = OFF    // SOSC Selection bits->Digital (SCLKI) mode
 #pragma config WDTWIN = PS25_0    // Window Mode Watchdog Timer Window Width Select->Watch Dog Timer Window Width is 25 percent
 #pragma config PLLSS = PLL_PRI    // PLL Secondary Selection Configuration bit->PLL is fed by the Primary oscillator
 #pragma config BOREN = ON    // Brown-out Reset Enable->Brown-out Reset Enable
@@ -68,7 +67,7 @@
 // CONFIG2
 #pragma config POSCMD = NONE    // Primary Oscillator Select->Primary Oscillator Disabled
 #pragma config WDTCLK = LPRC    // WDT Clock Source Select bits->WDT uses LPRC
-#pragma config OSCIOFCN = OFF    // OSCO Pin Configuration->OSCO/CLKO/RA3 functions as CLKO (FOSC/2)
+#pragma config OSCIOFCN = ON    // OSCO Pin Configuration->OSCO/CLKO/RA3 functions as port I/O (RA3)
 #pragma config FCKSM = CSDCMD    // Clock Switching and Fail-Safe Clock Monitor Configuration bits->Clock switching and Fail-Safe Clock Monitor are disabled
 #pragma config FNOSC = FRC    // Initial Oscillator Select->Fast RC Oscillator (FRC)
 #pragma config ALTCMPI = CxINC_RB    // Alternate Comparator Input bit->C1INC is on RB13, C2INC is on RB9 and C3INC is on RA0
@@ -99,8 +98,8 @@ void OSCILLATOR_Initialize(void)
 {
     // CF no clock failure; NOSC FRC; SOSCEN disabled; POSCEN disabled; CLKLOCK unlocked; OSWEN Switch is Complete; IOLOCK not-active; 
     __builtin_write_OSCCONL((uint8_t) (0x0000 & 0x00FF));
-    // PLLEN disabled; RCDIV FRC/2; DOZE 1:8; DOZEN disabled; ROI disabled; 
-    CLKDIV = 0x3100;
+    // PLLEN disabled; RCDIV FRC/1; DOZE 1:8; DOZEN disabled; ROI disabled; 
+    CLKDIV = 0x3000;
     // STOR disabled; STORPOL Interrupt when STOR is 1; STSIDL disabled; STLPOL Interrupt when STLOCK is 1; STLOCK disabled; STSRC SOSC; STEN disabled; TUN Center frequency; 
     OSCTUN = 0x0000;
     // ROEN disabled; ROSEL FOSC; ROSIDL disabled; ROSWEN disabled; ROOUT disabled; ROSLP disabled; 
@@ -109,8 +108,6 @@ void OSCILLATOR_Initialize(void)
     REFOCONH = 0x0000;
     // ROTRIM 0; 
     REFOTRIML = 0x0000;
-    // WDTO disabled; TRAPR disabled; SLEEP disabled; BOR disabled; DPSLP disabled; CM disabled; SWR disabled; SWDTEN disabled; EXTR disabled; POR disabled; IDLE disabled; IOPUWR disabled; VREGS disabled; 
-    RCON = 0x0000;
 }
 
 /**

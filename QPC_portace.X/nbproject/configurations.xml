@@ -9,6 +9,11 @@
       <itemPath>../bsp/bsp.c</itemPath>
       <itemPath>../bsp/bsp.h</itemPath>
     </logicalFolder>
+    <logicalFolder name="Display" displayName="Display" projectFiles="true">
+      <itemPath>Display/LEDDisplay.c</itemPath>
+      <itemPath>Display/LDD_BSP.h</itemPath>
+      <itemPath>Display/LEDDisplay.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
@@ -157,10 +162,6 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="Blinking/Blinky.c" ex="true" overriding="false">
-      </item>
-      <item path="Blinking/Blinky.h" ex="true" overriding="false">
-      </item>
       <C30>
         <property key="code-model" value="large-code"/>
         <property key="const-model" value="default"/>

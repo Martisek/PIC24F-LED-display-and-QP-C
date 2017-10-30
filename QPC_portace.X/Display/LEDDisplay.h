@@ -28,8 +28,8 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
+#ifndef LED_DISPLAY_H
+#define	LED_DISPLAY_H_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <string.h>
@@ -38,37 +38,16 @@
 #include "LDD_BSP.h"
 #include "../bsp/bsp.h"
 
-#define DARK_TIMEOUT    20
+#define DARK_TIMEOUT    80
 #define NSCRATCH        5
 
 /* Data types */
-typedef enum LEDDD_State LEDDD_State;
+typedef enum   LEDDD_State LEDDD_State;
+typedef enum   DisplaySignal DisplaySignal;
 typedef struct DisplayDigit DisplayDigit;
 typedef struct DisplayDriver DisplayDriver;
 typedef struct DisplayEvent DisplayEvent;
 typedef struct DisplayDigitValue DisplayDigitValue;
-typedef enum DisplaySignal DisplaySignal;
-
-struct DisplayDriver {
-   QActive super;
-   QTimeEvt timeTickEvent;
-   QTimeEvt timeBlickEvent;
-   DisplayDigitValue digitvalue;
-   uint8_t DarkTime;
-   void *general;
-};
-
-struct DisplayDigitValue {
-    char ones;
-    char tens;
-    char hundreds;
-    char thousands;
-};
-
-struct DisplayEvent {
-    QEvt super;
-    uint16_t value;
-};
 
 enum DisplaySignal {
     LDD_DUMMY_SIG       = Q_USER_SIG + 0,
@@ -82,8 +61,29 @@ enum DisplaySignal {
 };
 
 enum LEDDD_State {
-    LEDDD_OK = 0,
-    LEDD_FALSE = -1
+    LEDD_FALSE  = 0,
+    LEDDD_OK    = 1,  
+};
+
+struct DisplayDigitValue {
+    char ones;
+    char tens;
+    char hundreds;
+    char thousands;
+};
+
+struct DisplayDriver {
+   QActive super;
+   QTimeEvt timeTickEvent;
+   QTimeEvt timeBlickEvent;
+   DisplayDigitValue digitvalue;
+   uint8_t DarkTime;
+   void *general;
+};
+
+struct DisplayEvent {
+    QEvt super;
+    uint16_t value;
 };
 
 /*..............................................................................

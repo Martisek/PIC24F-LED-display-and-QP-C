@@ -15,7 +15,9 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../support/dsPIC30F/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../support/dsPIC33F/gld \
+  build/default/production/Blinking/Blinky.o \
   build/default/production/_ext/1360920944/bsp.o \
+  build/default/production/Display/LEDDisplay.o \
   build/default/production/_ext/633907107/qep.o \
   build/default/production/_ext/633907107/qfsm_dis.o \
   build/default/production/_ext/633907107/qfsm_ini.o \
@@ -91,6 +93,8 @@ c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.
                               c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o) (__data_init_da)
 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normalda.Leo)
                               (__crt_start_mode_normal)
+c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-c-elf.a(memcpy.DA_eo)
+                              build/default/production/Blinking/Blinky.o (_memcpy)
 
 
 xc16-ld 1.31 (A)
@@ -99,71 +103,86 @@ Program Memory  [Origin = 0x200, Length = 0x155f8]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x182           0x243  (579)
-.const                       0x382               0x2e0           0x450  (1104)
-.text.QHsm_dispatch          0x662               0x2a6           0x3f9  (1017)
-.text.QMPool_init            0x908               0x106           0x189  (393)
-.text.QF_tick                0xa0e                0xce           0x135  (309)
-.text.QHsm_init              0xadc                0xc4           0x126  (294)
-.text.QActive_postLIFO       0xba0                0xa8            0xfc  (252)
-.text.QActive_postFIFO       0xc48                0x9e            0xed  (237)
-.text.QActive_unsubscribeAll     0xce6                0x8e            0xd5  (213)
-.text.QEQueue_postLIFO       0xd74                0x8c            0xd2  (210)
-.text.QEQueue_postFIFO       0xe00                0x8a            0xcf  (207)
-.text.QF_publish             0xe8a                0x86            0xc9  (201)
-.text.QActive_get_           0xf10                0x84            0xc6  (198)
-.text.QF_poolInit            0xf94                0x74            0xae  (174)
-.text.QActive_subscribe     0x1008                0x6e            0xa5  (165)
-.text.QActive_unsubscribe    0x1076                0x6e            0xa5  (165)
-.text.QEQueue_get           0x10e4                0x6c            0xa2  (162)
-.text.QF_new_               0x1150                0x6a            0x9f  (159)
-.text.QTimeEvt_rearm        0x11ba                0x62            0x93  (147)
-.text.QTimeEvt_arm_         0x121c                0x5c            0x8a  (138)
-.text.QMPool_put            0x1278                0x56            0x81  (129)
-.text.QActive_start         0x12ce                0x54            0x7e  (126)
-.text.QHsm_isIn             0x1322                0x52            0x7b  (123)
-.text.QActive_recall        0x1374                0x52            0x7b  (123)
-.text.QF_gc                 0x13c6                0x52            0x7b  (123)
-.text.QMPool_get            0x1418                0x50            0x78  (120)
-.text.QFsm_dispatch         0x1468                0x4c            0x72  (114)
-.text.QFsm_init             0x14b4                0x4a            0x6f  (111)
-.text.QF_run                0x14fe                0x48            0x6c  (108)
-.text.QF_remove_            0x1546                0x42            0x63  (99)
-.text.QTimeEvt_ctor         0x1588                0x42            0x63  (99)
-.text.QF_getQueueMargin     0x15ca                0x40            0x60  (96)
-.text.QF_add_               0x160a                0x40            0x60  (96)
-.text.QF_getPoolMargin      0x164a                0x3e            0x5d  (93)
-.text.QEQueue_init          0x1688                0x36            0x51  (81)
-.text.PIN_MANAGER_Initialize    0x16be                0x36            0x51  (81)
-.dinit                      0x16f4                0x34            0x4e  (78)
-.text.main                  0x1728                0x30            0x48  (72)
-.text.BSP_random            0x1758                0x2e            0x45  (69)
-.text.QTimeEvt_disarm       0x1786                0x26            0x39  (57)
-.text.OSCILLATOR_Initialize    0x17ac                0x22            0x33  (51)
-.text.QF_onStartup          0x17ce                0x20            0x30  (48)
-.text.QActive_defer         0x17ee                0x14            0x1e  (30)
-.text.QF_psInit             0x1802                0x14            0x1e  (30)
-.text.QTimeEvt_ctr          0x1816                0x14            0x1e  (30)
-.text.BSP_init              0x182a                0x12            0x1b  (27)
-.text.QF_noTimeEvtsActive    0x183c                0x12            0x1b  (27)
-.text.SYSTEM_Initialize     0x184e                0x12            0x1b  (27)
-.text.BSP_randomSeed        0x1860                 0xe            0x15  (21)
-.text.QActive_stop          0x186e                 0xe            0x15  (21)
-.text.use_failsafe_stack    0x187c                 0xe            0x15  (21)
-.text.QHsm_top              0x188a                 0xc            0x12  (18)
-.text.Q_onAssert            0x1896                 0xa             0xf  (15)
-.text.QF_stop               0x18a0                 0xa             0xf  (15)
-.text.BSP_terminate         0x18aa                 0x8             0xc  (12)
-.text.BSP_displayPaused     0x18b2                 0x8             0xc  (12)
-.text.QF_onIdle             0x18ba                 0x8             0xc  (12)
-.text.QEP_getVersion        0x18c2                 0x8             0xc  (12)
-.text.QF_getVersion         0x18ca                 0x8             0xc  (12)
-.text.TRAPS_halt_on_error    0x18d2                 0x8             0xc  (12)
-.text.QF_onCleanup          0x18da                 0x6             0x9  (9)
-.text.QF_init               0x18e0                 0x6             0x9  (9)
-.text.INTERRUPT_Initialize    0x18e6                 0x6             0x9  (9)
+.text                        0x200               0x1a4           0x276  (630)
+.const                       0x3a4               0x3fc           0x5fa  (1530)
+.text.QHsm_dispatch          0x7a0               0x2a6           0x3f9  (1017)
+.text.LDD_Char2SegmentConvert     0xa46               0x19a           0x267  (615)
+.text.Double_dabble          0xbe0               0x126           0x1b9  (441)
+.text.QMPool_init            0xd06               0x106           0x189  (393)
+.text.QF_tick                0xe0c                0xce           0x135  (309)
+.text.QHsm_init              0xeda                0xc4           0x126  (294)
+.text.QActive_postLIFO       0xf9e                0xa8            0xfc  (252)
+.text.Display_Active        0x1046                0xa4            0xf6  (246)
+.text.QActive_postFIFO      0x10ea                0x9e            0xed  (237)
+.text.Display_SegOnes       0x1188                0x90            0xd8  (216)
+.text.Display_SegTens       0x1218                0x90            0xd8  (216)
+.text.Display_SegHundreds    0x12a8                0x90            0xd8  (216)
+.text.Display_SegThousands    0x1338                0x90            0xd8  (216)
+.text.QActive_unsubscribeAll    0x13c8                0x8e            0xd5  (213)
+.text.QEQueue_postLIFO      0x1456                0x8c            0xd2  (210)
+.text.QEQueue_postFIFO      0x14e2                0x8a            0xcf  (207)
+.text.QF_publish            0x156c                0x86            0xc9  (201)
+.text.QActive_get_          0x15f2                0x84            0xc6  (198)
+.text.Blinky_On             0x1676                0x7e            0xbd  (189)
+.text.Blinky_Off            0x16f4                0x7e            0xbd  (189)
+.text.QF_poolInit           0x1772                0x74            0xae  (174)
+.text.Display_Paused        0x17e6                0x70            0xa8  (168)
+.text.QActive_subscribe     0x1856                0x6e            0xa5  (165)
+.text.QActive_unsubscribe    0x18c4                0x6e            0xa5  (165)
+.text.QEQueue_get           0x1932                0x6c            0xa2  (162)
+.text.QF_new_               0x199e                0x6a            0x9f  (159)
+.text.QTimeEvt_rearm        0x1a08                0x62            0x93  (147)
+.text.QTimeEvt_arm_         0x1a6a                0x5c            0x8a  (138)
+.text.Display_OFF           0x1ac6                0x58            0x84  (132)
+.text.QMPool_put            0x1b1e                0x56            0x81  (129)
+.dinit                      0x1b74                0x56            0x81  (129)
+.text.QActive_start         0x1bca                0x54            0x7e  (126)
+.text.QHsm_isIn             0x1c1e                0x52            0x7b  (123)
+.text.QActive_recall        0x1c70                0x52            0x7b  (123)
+.text.QF_gc                 0x1cc2                0x52            0x7b  (123)
+.text.QMPool_get            0x1d14                0x50            0x78  (120)
+.text.main                  0x1d64                0x50            0x78  (120)
+.text.QFsm_dispatch         0x1db4                0x4c            0x72  (114)
+.text.QFsm_init             0x1e00                0x4a            0x6f  (111)
+.text.Display_Init          0x1e4a                0x48            0x6c  (108)
+.text.QF_run                0x1e92                0x48            0x6c  (108)
+.text.QF_remove_            0x1eda                0x42            0x63  (99)
+.text.QTimeEvt_ctor         0x1f1c                0x42            0x63  (99)
+.text.QF_getQueueMargin     0x1f5e                0x40            0x60  (96)
+.text.QF_add_               0x1f9e                0x40            0x60  (96)
+.text.QF_getPoolMargin      0x1fde                0x3e            0x5d  (93)
+.text.PIN_MANAGER_Initialize    0x201c                0x3e            0x5d  (93)
+.text.QEQueue_init          0x205a                0x36            0x51  (81)
+.text.BSP_random            0x2090                0x2e            0x45  (69)
+.text.Blinky_init           0x20be                0x2a            0x3f  (63)
+.text.DisplayCtor           0x20e8                0x2a            0x3f  (63)
+.text.QTimeEvt_disarm       0x2112                0x26            0x39  (57)
+.text.BlinkyCtor            0x2138                0x20            0x30  (48)
+.text.OSCILLATOR_Initialize    0x2158                0x20            0x30  (48)
+.text.QF_onStartup          0x2178                0x1e            0x2d  (45)
+.text.QActive_defer         0x2196                0x14            0x1e  (30)
+.text.QF_psInit             0x21aa                0x14            0x1e  (30)
+.text.QTimeEvt_ctr          0x21be                0x14            0x1e  (30)
+.text.BSP_init              0x21d2                0x12            0x1b  (27)
+.text.QF_noTimeEvtsActive    0x21e4                0x12            0x1b  (27)
+.text.SYSTEM_Initialize     0x21f6                0x12            0x1b  (27)
+.text.BSP_randomSeed        0x2208                 0xe            0x15  (21)
+.text.QActive_stop          0x2216                 0xe            0x15  (21)
+.text.use_failsafe_stack    0x2224                 0xe            0x15  (21)
+.text.QHsm_top              0x2232                 0xc            0x12  (18)
+.text.Q_onAssert            0x223e                 0xa             0xf  (15)
+.text.QF_stop               0x2248                 0xa             0xf  (15)
+.text.BSP_terminate         0x2252                 0x8             0xc  (12)
+.text.BSP_displayPaused     0x225a                 0x8             0xc  (12)
+.text.QF_onIdle             0x2262                 0x8             0xc  (12)
+.text.QEP_getVersion        0x226a                 0x8             0xc  (12)
+.text.QF_getVersion         0x2272                 0x8             0xc  (12)
+.text.TRAPS_halt_on_error    0x227a                 0x8             0xc  (12)
+.text.QF_onCleanup          0x2282                 0x6             0x9  (9)
+.text.QF_init               0x2288                 0x6             0x9  (9)
+.text.INTERRUPT_Initialize    0x228e                 0x6             0x9  (9)
 
-                 Total program memory used (bytes):         0x2262  (8802) 6%
+                 Total program memory used (bytes):         0x30de  (12510) 9%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -181,10 +200,12 @@ Data Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.bss                         0x800                   0            0x60  (96)
-.data                        0x860                   0             0x2  (2)
+.bss                         0x800                   0           0x104  (260)
+.data                        0x904                   0             0x4  (4)
+.bss                         0x908                   0             0x4  (4)
+.data                        0x90c                   0             0x2  (2)
 
-                 Total data memory used (bytes):           0x62  (98) 1%
+                 Total data memory used (bytes):          0x10e  (270) 3%
 
 
 Dynamic Memory Usage
@@ -192,32 +213,40 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x862                              0x1f9e  (8094)
+stack                        0x90e                              0x1ef2  (7922)
 
-                 Maximum dynamic memory (bytes):         0x1f9e  (8094)
+                 Maximum dynamic memory (bytes):         0x1ef2  (7922)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _QF_pool_
-                    0x081e                  _QF_maxPool_
-                    0x0840                  _QF_active_
-                    0x0852                  _QF_intLockNest_
-                    0x0858                  _QF_subscrList_
-                    0x085a                  _QF_maxSignal_
-                    0x085c                  _QF_timeEvtListHead_
-                    0x085e                  _QF_readySet_
+                    0x0830                  _DebugInfoString
+                    0x086c                  _BlinkyDebugString
+                    0x08a8                  _QF_pool_
+                    0x08c6                  _QF_maxPool_
+                    0x08e8                  _QF_active_
+                    0x08fa                  _QF_intLockNest_
+                    0x0900                  _QF_subscrList_
+                    0x0902                  _QF_maxSignal_
+                    0x0904                  _AO_Blinky
+                    0x0906                  _AO_LEDDisplay
+                    0x0908                  _QF_timeEvtListHead_
+                    0x090a                  _QF_readySet_
 
 External Symbols in Data Memory (by name):
 
-                    0x0840                  _QF_active_
-                    0x0852                  _QF_intLockNest_
-                    0x081e                  _QF_maxPool_
-                    0x085a                  _QF_maxSignal_
-                    0x0800                  _QF_pool_
-                    0x085e                  _QF_readySet_
-                    0x0858                  _QF_subscrList_
-                    0x085c                  _QF_timeEvtListHead_
+                    0x0904                  _AO_Blinky
+                    0x0906                  _AO_LEDDisplay
+                    0x086c                  _BlinkyDebugString
+                    0x0830                  _DebugInfoString
+                    0x08e8                  _QF_active_
+                    0x08fa                  _QF_intLockNest_
+                    0x08c6                  _QF_maxPool_
+                    0x0902                  _QF_maxSignal_
+                    0x08a8                  _QF_pool_
+                    0x090a                  _QF_readySet_
+                    0x0900                  _QF_subscrList_
+                    0x0908                  _QF_timeEvtListHead_
 
 External Symbols in Program Memory (by address):
 
@@ -225,151 +254,195 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __psv_init
                   0x000252                  __data_init
                   0x000252                  __data_init_da
-                  0x000308                  __T2Interrupt
-                  0x000350                  __OscillatorFail
-                  0x00035a                  __StackError
-                  0x000368                  __AddressError
-                  0x000372                  __MathError
-                  0x00037c                  __DefaultInterrupt
-                  0x000382                  _QF_log2Lkup
-                  0x000482                  _QF_pwr2Lkup
-                  0x0004c3                  _QF_invPwr2Lkup
-                  0x000504                  _QF_div8Lkup
-                  0x000546                  _QEP_reservedEvt_
-                  0x000662                  _QHsm_dispatch
-                  0x000908                  _QMPool_init
-                  0x000a0e                  _QF_tick
-                  0x000adc                  _QHsm_init
-                  0x000ba0                  _QActive_postLIFO
-                  0x000c48                  _QActive_postFIFO
-                  0x000ce6                  _QActive_unsubscribeAll
-                  0x000d74                  _QEQueue_postLIFO
-                  0x000e00                  _QEQueue_postFIFO
-                  0x000e8a                  _QF_publish
-                  0x000f10                  _QActive_get_
-                  0x000f94                  _QF_poolInit
-                  0x001008                  _QActive_subscribe
-                  0x001076                  _QActive_unsubscribe
-                  0x0010e4                  _QEQueue_get
-                  0x001150                  _QF_new_
-                  0x0011ba                  _QTimeEvt_rearm
-                  0x00121c                  _QTimeEvt_arm_
-                  0x001278                  _QMPool_put
-                  0x0012ce                  _QActive_start
-                  0x001322                  _QHsm_isIn
-                  0x001374                  _QActive_recall
-                  0x0013c6                  _QF_gc
-                  0x001418                  _QMPool_get
-                  0x001468                  _QFsm_dispatch
-                  0x0014b4                  _QFsm_init
-                  0x0014fe                  _QF_run
-                  0x001546                  _QF_remove_
-                  0x001588                  _QTimeEvt_ctor
-                  0x0015ca                  _QF_getQueueMargin
-                  0x00160a                  _QF_add_
-                  0x00164a                  _QF_getPoolMargin
-                  0x001688                  _QEQueue_init
-                  0x0016be                  _PIN_MANAGER_Initialize
-                  0x001728                  _main
-                  0x001758                  _BSP_random
-                  0x001786                  _QTimeEvt_disarm
-                  0x0017ac                  _OSCILLATOR_Initialize
-                  0x0017ce                  _QF_onStartup
-                  0x0017ee                  _QActive_defer
-                  0x001802                  _QF_psInit
-                  0x001816                  _QTimeEvt_ctr
-                  0x00182a                  _BSP_init
-                  0x00183c                  _QF_noTimeEvtsActive
-                  0x00184e                  _SYSTEM_Initialize
-                  0x001860                  _BSP_randomSeed
-                  0x00186e                  _QActive_stop
-                  0x00188a                  _QHsm_top
-                  0x001896                  _Q_onAssert
-                  0x0018a0                  _QF_stop
-                  0x0018aa                  _BSP_terminate
-                  0x0018b2                  _BSP_displayPaused
-                  0x0018ba                  _QF_onIdle
-                  0x0018c2                  _QEP_getVersion
-                  0x0018ca                  _QF_getVersion
-                  0x0018da                  _QF_onCleanup
-                  0x0018e0                  _QF_init
-                  0x0018e6                  _INTERRUPT_Initialize
+                  0x000334                  __T2Interrupt
+                  0x000364                  __OscillatorFail
+                  0x00036e                  __StackError
+                  0x00037c                  __AddressError
+                  0x000386                  __MathError
+                  0x000390                  __DefaultInterrupt
+                  0x000396                  _memcpy
+                  0x0003a4                  _QF_log2Lkup
+                  0x0004a4                  _QF_pwr2Lkup
+                  0x0004e5                  _QF_invPwr2Lkup
+                  0x000526                  _QF_div8Lkup
+                  0x000568                  _SegOnesEnterString
+                  0x000580                  _SegTensEnterString
+                  0x000598                  _SegHunsEnterString
+                  0x0005b0                  _SegThosEnterString
+                  0x0005c8                  _SegOnesExitString
+                  0x0005df                  _SegTensExitString
+                  0x0005f6                  _SegHunsExitString
+                  0x00060d                  _SegThosExitString
+                  0x000684                  _QEP_reservedEvt_
+                  0x0007a0                  _QHsm_dispatch
+                  0x000d06                  _QMPool_init
+                  0x000e0c                  _QF_tick
+                  0x000eda                  _QHsm_init
+                  0x000f9e                  _QActive_postLIFO
+                  0x001046                  build/default/production/Display/LEDDisplay.o:_Display_Active
+                  0x0010ea                  _QActive_postFIFO
+                  0x001188                  build/default/production/Display/LEDDisplay.o:_Display_SegOnes
+                  0x001218                  build/default/production/Display/LEDDisplay.o:_Display_SegTens
+                  0x0012a8                  build/default/production/Display/LEDDisplay.o:_Display_SegHundreds
+                  0x001338                  build/default/production/Display/LEDDisplay.o:_Display_SegThousands
+                  0x0013c8                  _QActive_unsubscribeAll
+                  0x001456                  _QEQueue_postLIFO
+                  0x0014e2                  _QEQueue_postFIFO
+                  0x00156c                  _QF_publish
+                  0x0015f2                  _QActive_get_
+                  0x001676                  build/default/production/Blinking/Blinky.o:_Blinky_On
+                  0x0016f4                  build/default/production/Blinking/Blinky.o:_Blinky_Off
+                  0x001772                  _QF_poolInit
+                  0x0017e6                  build/default/production/Display/LEDDisplay.o:_Display_Paused
+                  0x001856                  _QActive_subscribe
+                  0x0018c4                  _QActive_unsubscribe
+                  0x001932                  _QEQueue_get
+                  0x00199e                  _QF_new_
+                  0x001a08                  _QTimeEvt_rearm
+                  0x001a6a                  _QTimeEvt_arm_
+                  0x001ac6                  build/default/production/Display/LEDDisplay.o:_Display_OFF
+                  0x001b1e                  _QMPool_put
+                  0x001bca                  _QActive_start
+                  0x001c1e                  _QHsm_isIn
+                  0x001c70                  _QActive_recall
+                  0x001cc2                  _QF_gc
+                  0x001d14                  _QMPool_get
+                  0x001d64                  _main
+                  0x001db4                  _QFsm_dispatch
+                  0x001e00                  _QFsm_init
+                  0x001e4a                  build/default/production/Display/LEDDisplay.o:_Display_Init
+                  0x001e92                  _QF_run
+                  0x001eda                  _QF_remove_
+                  0x001f1c                  _QTimeEvt_ctor
+                  0x001f5e                  _QF_getQueueMargin
+                  0x001f9e                  _QF_add_
+                  0x001fde                  _QF_getPoolMargin
+                  0x00201c                  _PIN_MANAGER_Initialize
+                  0x00205a                  _QEQueue_init
+                  0x002090                  _BSP_random
+                  0x0020be                  build/default/production/Blinking/Blinky.o:_Blinky_init
+                  0x0020e8                  _DisplayCtor
+                  0x002112                  _QTimeEvt_disarm
+                  0x002138                  _BlinkyCtor
+                  0x002158                  _OSCILLATOR_Initialize
+                  0x002178                  _QF_onStartup
+                  0x002196                  _QActive_defer
+                  0x0021aa                  _QF_psInit
+                  0x0021be                  _QTimeEvt_ctr
+                  0x0021d2                  _BSP_init
+                  0x0021e4                  _QF_noTimeEvtsActive
+                  0x0021f6                  _SYSTEM_Initialize
+                  0x002208                  _BSP_randomSeed
+                  0x002216                  _QActive_stop
+                  0x002232                  _QHsm_top
+                  0x00223e                  _Q_onAssert
+                  0x002248                  _QF_stop
+                  0x002252                  _BSP_terminate
+                  0x00225a                  _BSP_displayPaused
+                  0x002262                  _QF_onIdle
+                  0x00226a                  _QEP_getVersion
+                  0x002272                  _QF_getVersion
+                  0x002282                  _QF_onCleanup
+                  0x002288                  _QF_init
+                  0x00228e                  _INTERRUPT_Initialize
 
 External Symbols in Program Memory (by name):
 
-                  0x0018b2                  _BSP_displayPaused
-                  0x00182a                  _BSP_init
-                  0x001758                  _BSP_random
-                  0x001860                  _BSP_randomSeed
-                  0x0018aa                  _BSP_terminate
-                  0x0018e6                  _INTERRUPT_Initialize
-                  0x0017ac                  _OSCILLATOR_Initialize
-                  0x0016be                  _PIN_MANAGER_Initialize
-                  0x0017ee                  _QActive_defer
-                  0x000f10                  _QActive_get_
-                  0x000c48                  _QActive_postFIFO
-                  0x000ba0                  _QActive_postLIFO
-                  0x001374                  _QActive_recall
-                  0x0012ce                  _QActive_start
-                  0x00186e                  _QActive_stop
-                  0x001008                  _QActive_subscribe
-                  0x001076                  _QActive_unsubscribe
-                  0x000ce6                  _QActive_unsubscribeAll
-                  0x0018c2                  _QEP_getVersion
-                  0x000546                  _QEP_reservedEvt_
-                  0x0010e4                  _QEQueue_get
-                  0x001688                  _QEQueue_init
-                  0x000e00                  _QEQueue_postFIFO
-                  0x000d74                  _QEQueue_postLIFO
-                  0x00160a                  _QF_add_
-                  0x000504                  _QF_div8Lkup
-                  0x0013c6                  _QF_gc
-                  0x00164a                  _QF_getPoolMargin
-                  0x0015ca                  _QF_getQueueMargin
-                  0x0018ca                  _QF_getVersion
-                  0x0018e0                  _QF_init
-                  0x0004c3                  _QF_invPwr2Lkup
-                  0x000382                  _QF_log2Lkup
-                  0x001150                  _QF_new_
-                  0x00183c                  _QF_noTimeEvtsActive
-                  0x0018da                  _QF_onCleanup
-                  0x0018ba                  _QF_onIdle
-                  0x0017ce                  _QF_onStartup
-                  0x000f94                  _QF_poolInit
-                  0x001802                  _QF_psInit
-                  0x000e8a                  _QF_publish
-                  0x000482                  _QF_pwr2Lkup
-                  0x001546                  _QF_remove_
-                  0x0014fe                  _QF_run
-                  0x0018a0                  _QF_stop
-                  0x000a0e                  _QF_tick
-                  0x001468                  _QFsm_dispatch
-                  0x0014b4                  _QFsm_init
-                  0x000662                  _QHsm_dispatch
-                  0x000adc                  _QHsm_init
-                  0x001322                  _QHsm_isIn
-                  0x00188a                  _QHsm_top
-                  0x001418                  _QMPool_get
-                  0x000908                  _QMPool_init
-                  0x001278                  _QMPool_put
-                  0x00121c                  _QTimeEvt_arm_
-                  0x001588                  _QTimeEvt_ctor
-                  0x001816                  _QTimeEvt_ctr
-                  0x001786                  _QTimeEvt_disarm
-                  0x0011ba                  _QTimeEvt_rearm
-                  0x001896                  _Q_onAssert
-                  0x00184e                  _SYSTEM_Initialize
-                  0x000368                  __AddressError
-                  0x00037c                  __DefaultInterrupt
-                  0x000372                  __MathError
-                  0x000350                  __OscillatorFail
-                  0x00035a                  __StackError
-                  0x000308                  __T2Interrupt
+                  0x00225a                  _BSP_displayPaused
+                  0x0021d2                  _BSP_init
+                  0x002090                  _BSP_random
+                  0x002208                  _BSP_randomSeed
+                  0x002252                  _BSP_terminate
+                  0x002138                  _BlinkyCtor
+                  0x0020e8                  _DisplayCtor
+                  0x00228e                  _INTERRUPT_Initialize
+                  0x002158                  _OSCILLATOR_Initialize
+                  0x00201c                  _PIN_MANAGER_Initialize
+                  0x002196                  _QActive_defer
+                  0x0015f2                  _QActive_get_
+                  0x0010ea                  _QActive_postFIFO
+                  0x000f9e                  _QActive_postLIFO
+                  0x001c70                  _QActive_recall
+                  0x001bca                  _QActive_start
+                  0x002216                  _QActive_stop
+                  0x001856                  _QActive_subscribe
+                  0x0018c4                  _QActive_unsubscribe
+                  0x0013c8                  _QActive_unsubscribeAll
+                  0x00226a                  _QEP_getVersion
+                  0x000684                  _QEP_reservedEvt_
+                  0x001932                  _QEQueue_get
+                  0x00205a                  _QEQueue_init
+                  0x0014e2                  _QEQueue_postFIFO
+                  0x001456                  _QEQueue_postLIFO
+                  0x001f9e                  _QF_add_
+                  0x000526                  _QF_div8Lkup
+                  0x001cc2                  _QF_gc
+                  0x001fde                  _QF_getPoolMargin
+                  0x001f5e                  _QF_getQueueMargin
+                  0x002272                  _QF_getVersion
+                  0x002288                  _QF_init
+                  0x0004e5                  _QF_invPwr2Lkup
+                  0x0003a4                  _QF_log2Lkup
+                  0x00199e                  _QF_new_
+                  0x0021e4                  _QF_noTimeEvtsActive
+                  0x002282                  _QF_onCleanup
+                  0x002262                  _QF_onIdle
+                  0x002178                  _QF_onStartup
+                  0x001772                  _QF_poolInit
+                  0x0021aa                  _QF_psInit
+                  0x00156c                  _QF_publish
+                  0x0004a4                  _QF_pwr2Lkup
+                  0x001eda                  _QF_remove_
+                  0x001e92                  _QF_run
+                  0x002248                  _QF_stop
+                  0x000e0c                  _QF_tick
+                  0x001db4                  _QFsm_dispatch
+                  0x001e00                  _QFsm_init
+                  0x0007a0                  _QHsm_dispatch
+                  0x000eda                  _QHsm_init
+                  0x001c1e                  _QHsm_isIn
+                  0x002232                  _QHsm_top
+                  0x001d14                  _QMPool_get
+                  0x000d06                  _QMPool_init
+                  0x001b1e                  _QMPool_put
+                  0x001a6a                  _QTimeEvt_arm_
+                  0x001f1c                  _QTimeEvt_ctor
+                  0x0021be                  _QTimeEvt_ctr
+                  0x002112                  _QTimeEvt_disarm
+                  0x001a08                  _QTimeEvt_rearm
+                  0x00223e                  _Q_onAssert
+                  0x0021f6                  _SYSTEM_Initialize
+                  0x000598                  _SegHunsEnterString
+                  0x0005f6                  _SegHunsExitString
+                  0x000568                  _SegOnesEnterString
+                  0x0005c8                  _SegOnesExitString
+                  0x000580                  _SegTensEnterString
+                  0x0005df                  _SegTensExitString
+                  0x0005b0                  _SegThosEnterString
+                  0x00060d                  _SegThosExitString
+                  0x00037c                  __AddressError
+                  0x000390                  __DefaultInterrupt
+                  0x000386                  __MathError
+                  0x000364                  __OscillatorFail
+                  0x00036e                  __StackError
+                  0x000334                  __T2Interrupt
                   0x000252                  __data_init
                   0x000252                  __data_init_da
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x001728                  _main
+                  0x001d64                  _main
+                  0x000396                  _memcpy
+                  0x0016f4                  build/default/production/Blinking/Blinky.o:_Blinky_Off
+                  0x001676                  build/default/production/Blinking/Blinky.o:_Blinky_On
+                  0x0020be                  build/default/production/Blinking/Blinky.o:_Blinky_init
+                  0x001046                  build/default/production/Display/LEDDisplay.o:_Display_Active
+                  0x001e4a                  build/default/production/Display/LEDDisplay.o:_Display_Init
+                  0x001ac6                  build/default/production/Display/LEDDisplay.o:_Display_OFF
+                  0x0017e6                  build/default/production/Display/LEDDisplay.o:_Display_Paused
+                  0x0012a8                  build/default/production/Display/LEDDisplay.o:_Display_SegHundreds
+                  0x001188                  build/default/production/Display/LEDDisplay.o:_Display_SegOnes
+                  0x001218                  build/default/production/Display/LEDDisplay.o:_Display_SegTens
+                  0x001338                  build/default/production/Display/LEDDisplay.o:_Display_SegThousands
 
 Memory Configuration
 
@@ -388,7 +461,9 @@ CONFIG1          0x0157fe           0x000002
 
 Linker script and memory map
 
+LOAD build/default/production/Blinking/Blinky.o
 LOAD build/default/production/_ext/1360920944/bsp.o
+LOAD build/default/production/Display/LEDDisplay.o
 LOAD build/default/production/_ext/633907107/qep.o
 LOAD build/default/production/_ext/633907107/qfsm_dis.o
 LOAD build/default/production/_ext/633907107/qfsm_ini.o
@@ -450,7 +525,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x182
+.text             0x000200        0x1a4
  *(.init)
  .init            0x000200         0x4c c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
                   0x000200                  __resetPRI
@@ -461,33 +536,35 @@ LOAD c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\libfx-elf.a
                   0x000252                  __data_init_da
  *(.user_init)
  *(.handle)
- .handle          0x000304          0x4 jump_table
+ .handle          0x000304         0x30 jump_table
  *(.isr*)
  .isr.text._T2Interrupt
-                  0x000308         0x48 build/default/production/_ext/1360920944/bsp.o
-                  0x000308                  __T2Interrupt
+                  0x000334         0x30 build/default/production/_ext/1360920944/bsp.o
+                  0x000334                  __T2Interrupt
  .isr.text._OscillatorFail
-                  0x000350          0xa build/default/production/mcc_generated_files/traps.o
-                  0x000350                  __OscillatorFail
+                  0x000364          0xa build/default/production/mcc_generated_files/traps.o
+                  0x000364                  __OscillatorFail
  .isr.text._StackError
-                  0x00035a          0xe build/default/production/mcc_generated_files/traps.o
-                  0x00035a                  __StackError
+                  0x00036e          0xe build/default/production/mcc_generated_files/traps.o
+                  0x00036e                  __StackError
  .isr.text._AddressError
-                  0x000368          0xa build/default/production/mcc_generated_files/traps.o
-                  0x000368                  __AddressError
+                  0x00037c          0xa build/default/production/mcc_generated_files/traps.o
+                  0x00037c                  __AddressError
  .isr.text._MathError
-                  0x000372          0xa build/default/production/mcc_generated_files/traps.o
-                  0x000372                  __MathError
- .isr             0x00037c          0x4 default_isr
-                  0x00037c                  __DefaultInterrupt
+                  0x000386          0xa build/default/production/mcc_generated_files/traps.o
+                  0x000386                  __MathError
+ .isr             0x000390          0x4 default_isr
+                  0x000390                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x000380          0x2 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normalda.Leo)
-                  0x000380                  __crt_start_mode
-                  0x000380                  __crt_start_mode_normal
+                  0x000394          0x2 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normalda.Leo)
+                  0x000394                  __crt_start_mode
+                  0x000394                  __crt_start_mode_normal
+ .libc.memcpy     0x000396          0xe c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-c-elf.a(memcpy.DA_eo)
+                  0x000396                  _memcpy
 
 usercode
  *(usercode)
@@ -507,214 +584,224 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0xaa6b
+.debug_info       0x000000       0xc03d
  *(.debug_info)
- .debug_info      0x000000        0xccd build/default/production/_ext/1360920944/bsp.o
- .debug_info      0x000ccd        0x307 build/default/production/_ext/633907107/qep.o
- .debug_info      0x000fd4        0x395 build/default/production/_ext/633907107/qfsm_dis.o
- .debug_info      0x001369        0x385 build/default/production/_ext/633907107/qfsm_ini.o
- .debug_info      0x0016ee        0x437 build/default/production/_ext/633907107/qhsm_dis.o
- .debug_info      0x001b25        0x398 build/default/production/_ext/633907107/qhsm_in.o
- .debug_info      0x001ebd        0x40e build/default/production/_ext/633907107/qhsm_ini.o
- .debug_info      0x0022cb        0x249 build/default/production/_ext/633907107/qhsm_top.o
- .debug_info      0x002514        0x477 build/default/production/_ext/1396818886/qa_defer.o
- .debug_info      0x00298b        0x481 build/default/production/_ext/1396818886/qa_fifo.o
- .debug_info      0x002e0c        0x50c build/default/production/_ext/1396818886/qa_get_.o
- .debug_info      0x003318        0x481 build/default/production/_ext/1396818886/qa_lifo.o
- .debug_info      0x003799        0x598 build/default/production/_ext/1396818886/qa_sub.o
- .debug_info      0x003d31        0x59b build/default/production/_ext/1396818886/qa_usub.o
- .debug_info      0x0042cc        0x5c0 build/default/production/_ext/1396818886/qa_usuba.o
- .debug_info      0x00488c        0x32e build/default/production/_ext/1396818886/qeq_fifo.o
- .debug_info      0x004bba        0x2de build/default/production/_ext/1396818886/qeq_get.o
- .debug_info      0x004e98        0x2f3 build/default/production/_ext/1396818886/qeq_init.o
- .debug_info      0x00518b        0x32e build/default/production/_ext/1396818886/qeq_lifo.o
- .debug_info      0x0054b9        0x4d6 build/default/production/_ext/1396818886/qf_act.o
- .debug_info      0x00598f        0x376 build/default/production/_ext/1396818886/qf_gc.o
- .debug_info      0x005d05        0x1a4 build/default/production/_ext/1396818886/qf_log2.o
- .debug_info      0x005ea9        0x3b1 build/default/production/_ext/1396818886/qf_new.o
- .debug_info      0x00625a        0x347 build/default/production/_ext/1396818886/qf_pool.o
- .debug_info      0x0065a1        0x275 build/default/production/_ext/1396818886/qf_psini.o
- .debug_info      0x006816        0x50f build/default/production/_ext/1396818886/qf_pspub.o
- .debug_info      0x006d25        0x1e5 build/default/production/_ext/1396818886/qf_pwr2.o
- .debug_info      0x006f0a        0x4a9 build/default/production/_ext/1396818886/qf_tick.o
- .debug_info      0x0073b3        0x3a8 build/default/production/_ext/1396818886/qmp_get.o
- .debug_info      0x00775b        0x356 build/default/production/_ext/1396818886/qmp_init.o
- .debug_info      0x007ab1        0x2f9 build/default/production/_ext/1396818886/qmp_put.o
- .debug_info      0x007daa        0x54b build/default/production/_ext/1396818886/qte_arm.o
- .debug_info      0x0082f5        0x4fe build/default/production/_ext/1396818886/qte_ctor.o
- .debug_info      0x0087f3        0x459 build/default/production/_ext/1396818886/qte_ctr.o
- .debug_info      0x008c4c        0x45d build/default/production/_ext/1396818886/qte_darm.o
- .debug_info      0x0090a9        0x524 build/default/production/_ext/1396818886/qte_rarm.o
- .debug_info      0x0095cd        0x593 build/default/production/_ext/1396818886/qvanilla.o
- .debug_info      0x009b60        0x3b5 build/default/production/mcc_generated_files/traps.o
- .debug_info      0x009f15        0x10d build/default/production/mcc_generated_files/interrupt_manager.o
- .debug_info      0x00a022        0x25e build/default/production/mcc_generated_files/mcc.o
- .debug_info      0x00a280        0x336 build/default/production/mcc_generated_files/pin_manager.o
- .debug_info      0x00a5b6        0x4b5 build/default/production/main.o
+ .debug_info      0x000000        0x777 build/default/production/Blinking/Blinky.o
+ .debug_info      0x000777        0xccd build/default/production/_ext/1360920944/bsp.o
+ .debug_info      0x001444        0xf23 build/default/production/Display/LEDDisplay.o
+ .debug_info      0x002367        0x307 build/default/production/_ext/633907107/qep.o
+ .debug_info      0x00266e        0x395 build/default/production/_ext/633907107/qfsm_dis.o
+ .debug_info      0x002a03        0x385 build/default/production/_ext/633907107/qfsm_ini.o
+ .debug_info      0x002d88        0x437 build/default/production/_ext/633907107/qhsm_dis.o
+ .debug_info      0x0031bf        0x398 build/default/production/_ext/633907107/qhsm_in.o
+ .debug_info      0x003557        0x40e build/default/production/_ext/633907107/qhsm_ini.o
+ .debug_info      0x003965        0x249 build/default/production/_ext/633907107/qhsm_top.o
+ .debug_info      0x003bae        0x477 build/default/production/_ext/1396818886/qa_defer.o
+ .debug_info      0x004025        0x481 build/default/production/_ext/1396818886/qa_fifo.o
+ .debug_info      0x0044a6        0x50c build/default/production/_ext/1396818886/qa_get_.o
+ .debug_info      0x0049b2        0x481 build/default/production/_ext/1396818886/qa_lifo.o
+ .debug_info      0x004e33        0x598 build/default/production/_ext/1396818886/qa_sub.o
+ .debug_info      0x0053cb        0x59b build/default/production/_ext/1396818886/qa_usub.o
+ .debug_info      0x005966        0x5c0 build/default/production/_ext/1396818886/qa_usuba.o
+ .debug_info      0x005f26        0x32e build/default/production/_ext/1396818886/qeq_fifo.o
+ .debug_info      0x006254        0x2de build/default/production/_ext/1396818886/qeq_get.o
+ .debug_info      0x006532        0x2f3 build/default/production/_ext/1396818886/qeq_init.o
+ .debug_info      0x006825        0x32e build/default/production/_ext/1396818886/qeq_lifo.o
+ .debug_info      0x006b53        0x4d6 build/default/production/_ext/1396818886/qf_act.o
+ .debug_info      0x007029        0x376 build/default/production/_ext/1396818886/qf_gc.o
+ .debug_info      0x00739f        0x1a4 build/default/production/_ext/1396818886/qf_log2.o
+ .debug_info      0x007543        0x3b1 build/default/production/_ext/1396818886/qf_new.o
+ .debug_info      0x0078f4        0x347 build/default/production/_ext/1396818886/qf_pool.o
+ .debug_info      0x007c3b        0x275 build/default/production/_ext/1396818886/qf_psini.o
+ .debug_info      0x007eb0        0x50f build/default/production/_ext/1396818886/qf_pspub.o
+ .debug_info      0x0083bf        0x1e5 build/default/production/_ext/1396818886/qf_pwr2.o
+ .debug_info      0x0085a4        0x4a9 build/default/production/_ext/1396818886/qf_tick.o
+ .debug_info      0x008a4d        0x3a8 build/default/production/_ext/1396818886/qmp_get.o
+ .debug_info      0x008df5        0x356 build/default/production/_ext/1396818886/qmp_init.o
+ .debug_info      0x00914b        0x2f9 build/default/production/_ext/1396818886/qmp_put.o
+ .debug_info      0x009444        0x54b build/default/production/_ext/1396818886/qte_arm.o
+ .debug_info      0x00998f        0x4fe build/default/production/_ext/1396818886/qte_ctor.o
+ .debug_info      0x009e8d        0x459 build/default/production/_ext/1396818886/qte_ctr.o
+ .debug_info      0x00a2e6        0x45d build/default/production/_ext/1396818886/qte_darm.o
+ .debug_info      0x00a743        0x524 build/default/production/_ext/1396818886/qte_rarm.o
+ .debug_info      0x00ac67        0x593 build/default/production/_ext/1396818886/qvanilla.o
+ .debug_info      0x00b1fa        0x3b5 build/default/production/mcc_generated_files/traps.o
+ .debug_info      0x00b5af        0x10d build/default/production/mcc_generated_files/interrupt_manager.o
+ .debug_info      0x00b6bc        0x240 build/default/production/mcc_generated_files/mcc.o
+ .debug_info      0x00b8fc        0x336 build/default/production/mcc_generated_files/pin_manager.o
+ .debug_info      0x00bc32        0x40b build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000       0x2213
+.debug_abbrev     0x000000       0x25b9
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x133 build/default/production/_ext/1360920944/bsp.o
- .debug_abbrev    0x000133         0xcc build/default/production/_ext/633907107/qep.o
- .debug_abbrev    0x0001ff         0xe3 build/default/production/_ext/633907107/qfsm_dis.o
- .debug_abbrev    0x0002e2         0xe3 build/default/production/_ext/633907107/qfsm_ini.o
- .debug_abbrev    0x0003c5         0xfb build/default/production/_ext/633907107/qhsm_dis.o
- .debug_abbrev    0x0004c0         0xe5 build/default/production/_ext/633907107/qhsm_in.o
- .debug_abbrev    0x0005a5         0xfb build/default/production/_ext/633907107/qhsm_ini.o
- .debug_abbrev    0x0006a0         0x87 build/default/production/_ext/633907107/qhsm_top.o
- .debug_abbrev    0x000727         0xd3 build/default/production/_ext/1396818886/qa_defer.o
- .debug_abbrev    0x0007fa         0xdc build/default/production/_ext/1396818886/qa_fifo.o
- .debug_abbrev    0x0008d6         0xde build/default/production/_ext/1396818886/qa_get_.o
- .debug_abbrev    0x0009b4         0xdc build/default/production/_ext/1396818886/qa_lifo.o
- .debug_abbrev    0x000a90        0x11f build/default/production/_ext/1396818886/qa_sub.o
- .debug_abbrev    0x000baf        0x11f build/default/production/_ext/1396818886/qa_usub.o
- .debug_abbrev    0x000cce        0x11f build/default/production/_ext/1396818886/qa_usuba.o
- .debug_abbrev    0x000ded         0xa1 build/default/production/_ext/1396818886/qeq_fifo.o
- .debug_abbrev    0x000e8e         0x91 build/default/production/_ext/1396818886/qeq_get.o
- .debug_abbrev    0x000f1f         0x80 build/default/production/_ext/1396818886/qeq_init.o
- .debug_abbrev    0x000f9f         0xa1 build/default/production/_ext/1396818886/qeq_lifo.o
- .debug_abbrev    0x001040        0x106 build/default/production/_ext/1396818886/qf_act.o
- .debug_abbrev    0x001146         0xc2 build/default/production/_ext/1396818886/qf_gc.o
- .debug_abbrev    0x001208         0x56 build/default/production/_ext/1396818886/qf_log2.o
- .debug_abbrev    0x00125e         0xbb build/default/production/_ext/1396818886/qf_new.o
- .debug_abbrev    0x001319         0xc1 build/default/production/_ext/1396818886/qf_pool.o
- .debug_abbrev    0x0013da         0xc1 build/default/production/_ext/1396818886/qf_psini.o
- .debug_abbrev    0x00149b        0x110 build/default/production/_ext/1396818886/qf_pspub.o
- .debug_abbrev    0x0015ab         0x56 build/default/production/_ext/1396818886/qf_pwr2.o
- .debug_abbrev    0x001601         0xe7 build/default/production/_ext/1396818886/qf_tick.o
- .debug_abbrev    0x0016e8         0xbb build/default/production/_ext/1396818886/qmp_get.o
- .debug_abbrev    0x0017a3         0xc6 build/default/production/_ext/1396818886/qmp_init.o
- .debug_abbrev    0x001869         0xa8 build/default/production/_ext/1396818886/qmp_put.o
- .debug_abbrev    0x001911        0x136 build/default/production/_ext/1396818886/qte_arm.o
- .debug_abbrev    0x001a47         0xfd build/default/production/_ext/1396818886/qte_ctor.o
- .debug_abbrev    0x001b44         0xd5 build/default/production/_ext/1396818886/qte_ctr.o
- .debug_abbrev    0x001c19         0xd5 build/default/production/_ext/1396818886/qte_darm.o
- .debug_abbrev    0x001cee        0x110 build/default/production/_ext/1396818886/qte_rarm.o
- .debug_abbrev    0x001dfe        0x124 build/default/production/_ext/1396818886/qvanilla.o
- .debug_abbrev    0x001f22        0x10d build/default/production/mcc_generated_files/traps.o
- .debug_abbrev    0x00202f         0x34 build/default/production/mcc_generated_files/interrupt_manager.o
- .debug_abbrev    0x002063         0x6a build/default/production/mcc_generated_files/mcc.o
- .debug_abbrev    0x0020cd         0x5d build/default/production/mcc_generated_files/pin_manager.o
- .debug_abbrev    0x00212a         0xe9 build/default/production/main.o
+ .debug_abbrev    0x000000        0x183 build/default/production/Blinking/Blinky.o
+ .debug_abbrev    0x000183        0x133 build/default/production/_ext/1360920944/bsp.o
+ .debug_abbrev    0x0002b6        0x24e build/default/production/Display/LEDDisplay.o
+ .debug_abbrev    0x000504         0xcc build/default/production/_ext/633907107/qep.o
+ .debug_abbrev    0x0005d0         0xe3 build/default/production/_ext/633907107/qfsm_dis.o
+ .debug_abbrev    0x0006b3         0xe3 build/default/production/_ext/633907107/qfsm_ini.o
+ .debug_abbrev    0x000796         0xfb build/default/production/_ext/633907107/qhsm_dis.o
+ .debug_abbrev    0x000891         0xe5 build/default/production/_ext/633907107/qhsm_in.o
+ .debug_abbrev    0x000976         0xfb build/default/production/_ext/633907107/qhsm_ini.o
+ .debug_abbrev    0x000a71         0x87 build/default/production/_ext/633907107/qhsm_top.o
+ .debug_abbrev    0x000af8         0xd3 build/default/production/_ext/1396818886/qa_defer.o
+ .debug_abbrev    0x000bcb         0xdc build/default/production/_ext/1396818886/qa_fifo.o
+ .debug_abbrev    0x000ca7         0xde build/default/production/_ext/1396818886/qa_get_.o
+ .debug_abbrev    0x000d85         0xdc build/default/production/_ext/1396818886/qa_lifo.o
+ .debug_abbrev    0x000e61        0x11f build/default/production/_ext/1396818886/qa_sub.o
+ .debug_abbrev    0x000f80        0x11f build/default/production/_ext/1396818886/qa_usub.o
+ .debug_abbrev    0x00109f        0x11f build/default/production/_ext/1396818886/qa_usuba.o
+ .debug_abbrev    0x0011be         0xa1 build/default/production/_ext/1396818886/qeq_fifo.o
+ .debug_abbrev    0x00125f         0x91 build/default/production/_ext/1396818886/qeq_get.o
+ .debug_abbrev    0x0012f0         0x80 build/default/production/_ext/1396818886/qeq_init.o
+ .debug_abbrev    0x001370         0xa1 build/default/production/_ext/1396818886/qeq_lifo.o
+ .debug_abbrev    0x001411        0x106 build/default/production/_ext/1396818886/qf_act.o
+ .debug_abbrev    0x001517         0xc2 build/default/production/_ext/1396818886/qf_gc.o
+ .debug_abbrev    0x0015d9         0x56 build/default/production/_ext/1396818886/qf_log2.o
+ .debug_abbrev    0x00162f         0xbb build/default/production/_ext/1396818886/qf_new.o
+ .debug_abbrev    0x0016ea         0xc1 build/default/production/_ext/1396818886/qf_pool.o
+ .debug_abbrev    0x0017ab         0xc1 build/default/production/_ext/1396818886/qf_psini.o
+ .debug_abbrev    0x00186c        0x110 build/default/production/_ext/1396818886/qf_pspub.o
+ .debug_abbrev    0x00197c         0x56 build/default/production/_ext/1396818886/qf_pwr2.o
+ .debug_abbrev    0x0019d2         0xe7 build/default/production/_ext/1396818886/qf_tick.o
+ .debug_abbrev    0x001ab9         0xbb build/default/production/_ext/1396818886/qmp_get.o
+ .debug_abbrev    0x001b74         0xc6 build/default/production/_ext/1396818886/qmp_init.o
+ .debug_abbrev    0x001c3a         0xa8 build/default/production/_ext/1396818886/qmp_put.o
+ .debug_abbrev    0x001ce2        0x136 build/default/production/_ext/1396818886/qte_arm.o
+ .debug_abbrev    0x001e18         0xfd build/default/production/_ext/1396818886/qte_ctor.o
+ .debug_abbrev    0x001f15         0xd5 build/default/production/_ext/1396818886/qte_ctr.o
+ .debug_abbrev    0x001fea         0xd5 build/default/production/_ext/1396818886/qte_darm.o
+ .debug_abbrev    0x0020bf        0x110 build/default/production/_ext/1396818886/qte_rarm.o
+ .debug_abbrev    0x0021cf        0x124 build/default/production/_ext/1396818886/qvanilla.o
+ .debug_abbrev    0x0022f3        0x10d build/default/production/mcc_generated_files/traps.o
+ .debug_abbrev    0x002400         0x34 build/default/production/mcc_generated_files/interrupt_manager.o
+ .debug_abbrev    0x002434         0x6a build/default/production/mcc_generated_files/mcc.o
+ .debug_abbrev    0x00249e         0x5d build/default/production/mcc_generated_files/pin_manager.o
+ .debug_abbrev    0x0024fb         0xbe build/default/production/main.o
 
-.debug_line       0x000000       0x26da
+.debug_line       0x000000       0x2b35
  *(.debug_line)
- .debug_line      0x000000        0x1c0 build/default/production/_ext/1360920944/bsp.o
- .debug_line      0x0001c0         0xc4 build/default/production/_ext/633907107/qep.o
- .debug_line      0x000284         0xe0 build/default/production/_ext/633907107/qfsm_dis.o
- .debug_line      0x000364         0xdb build/default/production/_ext/633907107/qfsm_ini.o
- .debug_line      0x00043f        0x15c build/default/production/_ext/633907107/qhsm_dis.o
- .debug_line      0x00059b         0xdc build/default/production/_ext/633907107/qhsm_in.o
- .debug_line      0x000677         0xe9 build/default/production/_ext/633907107/qhsm_ini.o
- .debug_line      0x000760         0xba build/default/production/_ext/633907107/qhsm_top.o
- .debug_line      0x00081a         0xf6 build/default/production/_ext/1396818886/qa_defer.o
- .debug_line      0x000910        0x105 build/default/production/_ext/1396818886/qa_fifo.o
- .debug_line      0x000a15        0x11d build/default/production/_ext/1396818886/qa_get_.o
- .debug_line      0x000b32        0x106 build/default/production/_ext/1396818886/qa_lifo.o
- .debug_line      0x000c38         0xed build/default/production/_ext/1396818886/qa_sub.o
- .debug_line      0x000d25         0xee build/default/production/_ext/1396818886/qa_usub.o
- .debug_line      0x000e13         0xfc build/default/production/_ext/1396818886/qa_usuba.o
- .debug_line      0x000f0f         0xda build/default/production/_ext/1396818886/qeq_fifo.o
- .debug_line      0x000fe9         0xcd build/default/production/_ext/1396818886/qeq_get.o
- .debug_line      0x0010b6         0xc3 build/default/production/_ext/1396818886/qeq_init.o
- .debug_line      0x001179         0xda build/default/production/_ext/1396818886/qeq_lifo.o
- .debug_line      0x001253        0x10b build/default/production/_ext/1396818886/qf_act.o
- .debug_line      0x00135e         0xdf build/default/production/_ext/1396818886/qf_gc.o
- .debug_line      0x00143d         0x89 build/default/production/_ext/1396818886/qf_log2.o
- .debug_line      0x0014c6         0xe9 build/default/production/_ext/1396818886/qf_new.o
- .debug_line      0x0015af         0xe2 build/default/production/_ext/1396818886/qf_pool.o
- .debug_line      0x001691         0xc5 build/default/production/_ext/1396818886/qf_psini.o
- .debug_line      0x001756         0xfc build/default/production/_ext/1396818886/qf_pspub.o
- .debug_line      0x001852         0x89 build/default/production/_ext/1396818886/qf_pwr2.o
- .debug_line      0x0018db        0x105 build/default/production/_ext/1396818886/qf_tick.o
- .debug_line      0x0019e0         0xf7 build/default/production/_ext/1396818886/qmp_get.o
- .debug_line      0x001ad7         0xf4 build/default/production/_ext/1396818886/qmp_init.o
- .debug_line      0x001bcb         0xdc build/default/production/_ext/1396818886/qmp_put.o
- .debug_line      0x001ca7        0x104 build/default/production/_ext/1396818886/qte_arm.o
- .debug_line      0x001dab         0xe2 build/default/production/_ext/1396818886/qte_ctor.o
- .debug_line      0x001e8d         0xd2 build/default/production/_ext/1396818886/qte_ctr.o
- .debug_line      0x001f5f         0xd6 build/default/production/_ext/1396818886/qte_darm.o
- .debug_line      0x002035         0xf5 build/default/production/_ext/1396818886/qte_rarm.o
- .debug_line      0x00212a        0x149 build/default/production/_ext/1396818886/qvanilla.o
- .debug_line      0x002273        0x165 build/default/production/mcc_generated_files/traps.o
- .debug_line      0x0023d8         0x55 build/default/production/mcc_generated_files/interrupt_manager.o
- .debug_line      0x00242d        0x116 build/default/production/mcc_generated_files/mcc.o
- .debug_line      0x002543         0xbf build/default/production/mcc_generated_files/pin_manager.o
- .debug_line      0x002602         0xd8 build/default/production/main.o
+ .debug_line      0x000000        0x18f build/default/production/Blinking/Blinky.o
+ .debug_line      0x00018f        0x1be build/default/production/_ext/1360920944/bsp.o
+ .debug_line      0x00034d        0x2b2 build/default/production/Display/LEDDisplay.o
+ .debug_line      0x0005ff         0xc4 build/default/production/_ext/633907107/qep.o
+ .debug_line      0x0006c3         0xe0 build/default/production/_ext/633907107/qfsm_dis.o
+ .debug_line      0x0007a3         0xdb build/default/production/_ext/633907107/qfsm_ini.o
+ .debug_line      0x00087e        0x15c build/default/production/_ext/633907107/qhsm_dis.o
+ .debug_line      0x0009da         0xdc build/default/production/_ext/633907107/qhsm_in.o
+ .debug_line      0x000ab6         0xe9 build/default/production/_ext/633907107/qhsm_ini.o
+ .debug_line      0x000b9f         0xba build/default/production/_ext/633907107/qhsm_top.o
+ .debug_line      0x000c59         0xf6 build/default/production/_ext/1396818886/qa_defer.o
+ .debug_line      0x000d4f        0x105 build/default/production/_ext/1396818886/qa_fifo.o
+ .debug_line      0x000e54        0x11d build/default/production/_ext/1396818886/qa_get_.o
+ .debug_line      0x000f71        0x106 build/default/production/_ext/1396818886/qa_lifo.o
+ .debug_line      0x001077         0xed build/default/production/_ext/1396818886/qa_sub.o
+ .debug_line      0x001164         0xee build/default/production/_ext/1396818886/qa_usub.o
+ .debug_line      0x001252         0xfc build/default/production/_ext/1396818886/qa_usuba.o
+ .debug_line      0x00134e         0xda build/default/production/_ext/1396818886/qeq_fifo.o
+ .debug_line      0x001428         0xcd build/default/production/_ext/1396818886/qeq_get.o
+ .debug_line      0x0014f5         0xc3 build/default/production/_ext/1396818886/qeq_init.o
+ .debug_line      0x0015b8         0xda build/default/production/_ext/1396818886/qeq_lifo.o
+ .debug_line      0x001692        0x10b build/default/production/_ext/1396818886/qf_act.o
+ .debug_line      0x00179d         0xdf build/default/production/_ext/1396818886/qf_gc.o
+ .debug_line      0x00187c         0x89 build/default/production/_ext/1396818886/qf_log2.o
+ .debug_line      0x001905         0xe9 build/default/production/_ext/1396818886/qf_new.o
+ .debug_line      0x0019ee         0xe2 build/default/production/_ext/1396818886/qf_pool.o
+ .debug_line      0x001ad0         0xc5 build/default/production/_ext/1396818886/qf_psini.o
+ .debug_line      0x001b95         0xfc build/default/production/_ext/1396818886/qf_pspub.o
+ .debug_line      0x001c91         0x89 build/default/production/_ext/1396818886/qf_pwr2.o
+ .debug_line      0x001d1a        0x105 build/default/production/_ext/1396818886/qf_tick.o
+ .debug_line      0x001e1f         0xf7 build/default/production/_ext/1396818886/qmp_get.o
+ .debug_line      0x001f16         0xf4 build/default/production/_ext/1396818886/qmp_init.o
+ .debug_line      0x00200a         0xdc build/default/production/_ext/1396818886/qmp_put.o
+ .debug_line      0x0020e6        0x104 build/default/production/_ext/1396818886/qte_arm.o
+ .debug_line      0x0021ea         0xe2 build/default/production/_ext/1396818886/qte_ctor.o
+ .debug_line      0x0022cc         0xd2 build/default/production/_ext/1396818886/qte_ctr.o
+ .debug_line      0x00239e         0xd6 build/default/production/_ext/1396818886/qte_darm.o
+ .debug_line      0x002474         0xf5 build/default/production/_ext/1396818886/qte_rarm.o
+ .debug_line      0x002569        0x149 build/default/production/_ext/1396818886/qvanilla.o
+ .debug_line      0x0026b2        0x165 build/default/production/mcc_generated_files/traps.o
+ .debug_line      0x002817         0x55 build/default/production/mcc_generated_files/interrupt_manager.o
+ .debug_line      0x00286c        0x115 build/default/production/mcc_generated_files/mcc.o
+ .debug_line      0x002981         0xbf build/default/production/mcc_generated_files/pin_manager.o
+ .debug_line      0x002a40         0xf5 build/default/production/main.o
 
-.debug_frame      0x000000        0xa36
+.debug_frame      0x000000        0xc02
  *(.debug_frame)
- .debug_frame     0x000000        0x154 build/default/production/_ext/1360920944/bsp.o
- .debug_frame     0x000154         0x30 build/default/production/_ext/633907107/qep.o
- .debug_frame     0x000184         0x30 build/default/production/_ext/633907107/qfsm_dis.o
- .debug_frame     0x0001b4         0x30 build/default/production/_ext/633907107/qfsm_ini.o
- .debug_frame     0x0001e4         0x30 build/default/production/_ext/633907107/qhsm_dis.o
- .debug_frame     0x000214         0x30 build/default/production/_ext/633907107/qhsm_in.o
- .debug_frame     0x000244         0x30 build/default/production/_ext/633907107/qhsm_ini.o
- .debug_frame     0x000274         0x30 build/default/production/_ext/633907107/qhsm_top.o
- .debug_frame     0x0002a4         0x4c build/default/production/_ext/1396818886/qa_defer.o
- .debug_frame     0x0002f0         0x30 build/default/production/_ext/1396818886/qa_fifo.o
- .debug_frame     0x000320         0x4c build/default/production/_ext/1396818886/qa_get_.o
- .debug_frame     0x00036c         0x30 build/default/production/_ext/1396818886/qa_lifo.o
- .debug_frame     0x00039c         0x30 build/default/production/_ext/1396818886/qa_sub.o
- .debug_frame     0x0003cc         0x30 build/default/production/_ext/1396818886/qa_usub.o
- .debug_frame     0x0003fc         0x30 build/default/production/_ext/1396818886/qa_usuba.o
- .debug_frame     0x00042c         0x30 build/default/production/_ext/1396818886/qeq_fifo.o
- .debug_frame     0x00045c         0x30 build/default/production/_ext/1396818886/qeq_get.o
- .debug_frame     0x00048c         0x30 build/default/production/_ext/1396818886/qeq_init.o
- .debug_frame     0x0004bc         0x30 build/default/production/_ext/1396818886/qeq_lifo.o
- .debug_frame     0x0004ec         0x68 build/default/production/_ext/1396818886/qf_act.o
- .debug_frame     0x000554         0x30 build/default/production/_ext/1396818886/qf_gc.o
- .debug_frame     0x000584         0x30 build/default/production/_ext/1396818886/qf_new.o
- .debug_frame     0x0005b4         0x30 build/default/production/_ext/1396818886/qf_pool.o
- .debug_frame     0x0005e4         0x30 build/default/production/_ext/1396818886/qf_psini.o
- .debug_frame     0x000614         0x30 build/default/production/_ext/1396818886/qf_pspub.o
- .debug_frame     0x000644         0x30 build/default/production/_ext/1396818886/qf_tick.o
- .debug_frame     0x000674         0x4c build/default/production/_ext/1396818886/qmp_get.o
- .debug_frame     0x0006c0         0x30 build/default/production/_ext/1396818886/qmp_init.o
- .debug_frame     0x0006f0         0x30 build/default/production/_ext/1396818886/qmp_put.o
- .debug_frame     0x000720         0x4c build/default/production/_ext/1396818886/qte_arm.o
- .debug_frame     0x00076c         0x30 build/default/production/_ext/1396818886/qte_ctor.o
- .debug_frame     0x00079c         0x30 build/default/production/_ext/1396818886/qte_ctr.o
- .debug_frame     0x0007cc         0x30 build/default/production/_ext/1396818886/qte_darm.o
- .debug_frame     0x0007fc         0x30 build/default/production/_ext/1396818886/qte_rarm.o
- .debug_frame     0x00082c         0xa0 build/default/production/_ext/1396818886/qvanilla.o
- .debug_frame     0x0008cc         0x80 build/default/production/mcc_generated_files/traps.o
- .debug_frame     0x00094c         0x30 build/default/production/mcc_generated_files/interrupt_manager.o
- .debug_frame     0x00097c         0x4c build/default/production/mcc_generated_files/mcc.o
- .debug_frame     0x0009c8         0x30 build/default/production/mcc_generated_files/pin_manager.o
- .debug_frame     0x0009f8         0x3e build/default/production/main.o
+ .debug_frame     0x000000         0x84 build/default/production/Blinking/Blinky.o
+ .debug_frame     0x000084        0x154 build/default/production/_ext/1360920944/bsp.o
+ .debug_frame     0x0001d8        0x148 build/default/production/Display/LEDDisplay.o
+ .debug_frame     0x000320         0x30 build/default/production/_ext/633907107/qep.o
+ .debug_frame     0x000350         0x30 build/default/production/_ext/633907107/qfsm_dis.o
+ .debug_frame     0x000380         0x30 build/default/production/_ext/633907107/qfsm_ini.o
+ .debug_frame     0x0003b0         0x30 build/default/production/_ext/633907107/qhsm_dis.o
+ .debug_frame     0x0003e0         0x30 build/default/production/_ext/633907107/qhsm_in.o
+ .debug_frame     0x000410         0x30 build/default/production/_ext/633907107/qhsm_ini.o
+ .debug_frame     0x000440         0x30 build/default/production/_ext/633907107/qhsm_top.o
+ .debug_frame     0x000470         0x4c build/default/production/_ext/1396818886/qa_defer.o
+ .debug_frame     0x0004bc         0x30 build/default/production/_ext/1396818886/qa_fifo.o
+ .debug_frame     0x0004ec         0x4c build/default/production/_ext/1396818886/qa_get_.o
+ .debug_frame     0x000538         0x30 build/default/production/_ext/1396818886/qa_lifo.o
+ .debug_frame     0x000568         0x30 build/default/production/_ext/1396818886/qa_sub.o
+ .debug_frame     0x000598         0x30 build/default/production/_ext/1396818886/qa_usub.o
+ .debug_frame     0x0005c8         0x30 build/default/production/_ext/1396818886/qa_usuba.o
+ .debug_frame     0x0005f8         0x30 build/default/production/_ext/1396818886/qeq_fifo.o
+ .debug_frame     0x000628         0x30 build/default/production/_ext/1396818886/qeq_get.o
+ .debug_frame     0x000658         0x30 build/default/production/_ext/1396818886/qeq_init.o
+ .debug_frame     0x000688         0x30 build/default/production/_ext/1396818886/qeq_lifo.o
+ .debug_frame     0x0006b8         0x68 build/default/production/_ext/1396818886/qf_act.o
+ .debug_frame     0x000720         0x30 build/default/production/_ext/1396818886/qf_gc.o
+ .debug_frame     0x000750         0x30 build/default/production/_ext/1396818886/qf_new.o
+ .debug_frame     0x000780         0x30 build/default/production/_ext/1396818886/qf_pool.o
+ .debug_frame     0x0007b0         0x30 build/default/production/_ext/1396818886/qf_psini.o
+ .debug_frame     0x0007e0         0x30 build/default/production/_ext/1396818886/qf_pspub.o
+ .debug_frame     0x000810         0x30 build/default/production/_ext/1396818886/qf_tick.o
+ .debug_frame     0x000840         0x4c build/default/production/_ext/1396818886/qmp_get.o
+ .debug_frame     0x00088c         0x30 build/default/production/_ext/1396818886/qmp_init.o
+ .debug_frame     0x0008bc         0x30 build/default/production/_ext/1396818886/qmp_put.o
+ .debug_frame     0x0008ec         0x4c build/default/production/_ext/1396818886/qte_arm.o
+ .debug_frame     0x000938         0x30 build/default/production/_ext/1396818886/qte_ctor.o
+ .debug_frame     0x000968         0x30 build/default/production/_ext/1396818886/qte_ctr.o
+ .debug_frame     0x000998         0x30 build/default/production/_ext/1396818886/qte_darm.o
+ .debug_frame     0x0009c8         0x30 build/default/production/_ext/1396818886/qte_rarm.o
+ .debug_frame     0x0009f8         0xa0 build/default/production/_ext/1396818886/qvanilla.o
+ .debug_frame     0x000a98         0x80 build/default/production/mcc_generated_files/traps.o
+ .debug_frame     0x000b18         0x30 build/default/production/mcc_generated_files/interrupt_manager.o
+ .debug_frame     0x000b48         0x4c build/default/production/mcc_generated_files/mcc.o
+ .debug_frame     0x000b94         0x30 build/default/production/mcc_generated_files/pin_manager.o
+ .debug_frame     0x000bc4         0x3e build/default/production/main.o
 
-.debug_str        0x000000        0x2fa
+.debug_str        0x000000        0x40e
  *(.debug_str)
- .debug_str       0x000000         0x37 build/default/production/_ext/1360920944/bsp.o
- .debug_str       0x000037         0x11 build/default/production/_ext/633907107/qfsm_dis.o
- .debug_str       0x000048         0x11 build/default/production/_ext/633907107/qfsm_ini.o
- .debug_str       0x000059         0x11 build/default/production/_ext/633907107/qhsm_dis.o
- .debug_str       0x00006a         0x11 build/default/production/_ext/633907107/qhsm_in.o
- .debug_str       0x00007b         0x11 build/default/production/_ext/633907107/qhsm_ini.o
- .debug_str       0x00008c         0x19 build/default/production/_ext/1396818886/qa_fifo.o
- .debug_str       0x0000a5         0x27 build/default/production/_ext/1396818886/qa_get_.o
- .debug_str       0x0000cc         0x19 build/default/production/_ext/1396818886/qa_lifo.o
- .debug_str       0x0000e5         0x40 build/default/production/_ext/1396818886/qa_sub.o
- .debug_str       0x000125         0x43 build/default/production/_ext/1396818886/qa_usub.o
- .debug_str       0x000168         0x4f build/default/production/_ext/1396818886/qa_usuba.o
- .debug_str       0x0001b7          0xb build/default/production/_ext/1396818886/qf_act.o
- .debug_str       0x0001c2         0x15 build/default/production/_ext/1396818886/qf_gc.o
- .debug_str       0x0001d7         0x15 build/default/production/_ext/1396818886/qf_new.o
- .debug_str       0x0001ec         0x15 build/default/production/_ext/1396818886/qf_pool.o
- .debug_str       0x000201         0x1d build/default/production/_ext/1396818886/qf_psini.o
- .debug_str       0x00021e         0x37 build/default/production/_ext/1396818886/qf_pspub.o
- .debug_str       0x000255         0x14 build/default/production/_ext/1396818886/qf_tick.o
- .debug_str       0x000269         0x15 build/default/production/_ext/1396818886/qmp_get.o
- .debug_str       0x00027e          0xa build/default/production/_ext/1396818886/qmp_init.o
- .debug_str       0x000288         0x14 build/default/production/_ext/1396818886/qte_arm.o
- .debug_str       0x00029c         0x14 build/default/production/_ext/1396818886/qte_rarm.o
- .debug_str       0x0002b0         0x18 build/default/production/_ext/1396818886/qvanilla.o
- .debug_str       0x0002c8          0xc build/default/production/mcc_generated_files/traps.o
- .debug_str       0x0002d4         0x1c build/default/production/mcc_generated_files/mcc.o
- .debug_str       0x0002f0          0xa build/default/production/main.o
+ .debug_str       0x000000         0x1b build/default/production/Blinking/Blinky.o
+ .debug_str       0x00001b         0x37 build/default/production/_ext/1360920944/bsp.o
+ .debug_str       0x000052         0xeb build/default/production/Display/LEDDisplay.o
+ .debug_str       0x00013d         0x11 build/default/production/_ext/633907107/qfsm_dis.o
+ .debug_str       0x00014e         0x11 build/default/production/_ext/633907107/qfsm_ini.o
+ .debug_str       0x00015f         0x11 build/default/production/_ext/633907107/qhsm_dis.o
+ .debug_str       0x000170         0x11 build/default/production/_ext/633907107/qhsm_in.o
+ .debug_str       0x000181         0x11 build/default/production/_ext/633907107/qhsm_ini.o
+ .debug_str       0x000192         0x19 build/default/production/_ext/1396818886/qa_fifo.o
+ .debug_str       0x0001ab         0x27 build/default/production/_ext/1396818886/qa_get_.o
+ .debug_str       0x0001d2         0x19 build/default/production/_ext/1396818886/qa_lifo.o
+ .debug_str       0x0001eb         0x40 build/default/production/_ext/1396818886/qa_sub.o
+ .debug_str       0x00022b         0x43 build/default/production/_ext/1396818886/qa_usub.o
+ .debug_str       0x00026e         0x4f build/default/production/_ext/1396818886/qa_usuba.o
+ .debug_str       0x0002bd          0xb build/default/production/_ext/1396818886/qf_act.o
+ .debug_str       0x0002c8         0x15 build/default/production/_ext/1396818886/qf_gc.o
+ .debug_str       0x0002dd         0x15 build/default/production/_ext/1396818886/qf_new.o
+ .debug_str       0x0002f2         0x15 build/default/production/_ext/1396818886/qf_pool.o
+ .debug_str       0x000307         0x1d build/default/production/_ext/1396818886/qf_psini.o
+ .debug_str       0x000324         0x37 build/default/production/_ext/1396818886/qf_pspub.o
+ .debug_str       0x00035b         0x14 build/default/production/_ext/1396818886/qf_tick.o
+ .debug_str       0x00036f         0x15 build/default/production/_ext/1396818886/qmp_get.o
+ .debug_str       0x000384          0xa build/default/production/_ext/1396818886/qmp_init.o
+ .debug_str       0x00038e         0x14 build/default/production/_ext/1396818886/qte_arm.o
+ .debug_str       0x0003a2         0x14 build/default/production/_ext/1396818886/qte_rarm.o
+ .debug_str       0x0003b6         0x18 build/default/production/_ext/1396818886/qvanilla.o
+ .debug_str       0x0003ce          0xc build/default/production/mcc_generated_files/traps.o
+ .debug_str       0x0003da         0x1c build/default/production/mcc_generated_files/mcc.o
+ .debug_str       0x0003f6         0x18 build/default/production/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -723,178 +810,186 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x83c
+                  0x000000        0x97d
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xb9 build/default/production/_ext/1360920944/bsp.o
+                  0x000000         0x45 build/default/production/Blinking/Blinky.o
  .debug_pubnames
-                  0x0000b9         0x3a build/default/production/_ext/633907107/qep.o
+                  0x000045         0xb9 build/default/production/_ext/1360920944/bsp.o
  .debug_pubnames
-                  0x0000f3         0x24 build/default/production/_ext/633907107/qfsm_dis.o
+                  0x0000fe         0xfc build/default/production/Display/LEDDisplay.o
  .debug_pubnames
-                  0x000117         0x20 build/default/production/_ext/633907107/qfsm_ini.o
+                  0x0001fa         0x3a build/default/production/_ext/633907107/qep.o
  .debug_pubnames
-                  0x000137         0x24 build/default/production/_ext/633907107/qhsm_dis.o
+                  0x000234         0x24 build/default/production/_ext/633907107/qfsm_dis.o
  .debug_pubnames
-                  0x00015b         0x20 build/default/production/_ext/633907107/qhsm_in.o
+                  0x000258         0x20 build/default/production/_ext/633907107/qfsm_ini.o
  .debug_pubnames
-                  0x00017b         0x20 build/default/production/_ext/633907107/qhsm_ini.o
+                  0x000278         0x24 build/default/production/_ext/633907107/qhsm_dis.o
  .debug_pubnames
-                  0x00019b         0x1f build/default/production/_ext/633907107/qhsm_top.o
+                  0x00029c         0x20 build/default/production/_ext/633907107/qhsm_in.o
  .debug_pubnames
-                  0x0001ba         0x37 build/default/production/_ext/1396818886/qa_defer.o
+                  0x0002bc         0x20 build/default/production/_ext/633907107/qhsm_ini.o
  .debug_pubnames
-                  0x0001f1         0x27 build/default/production/_ext/1396818886/qa_fifo.o
+                  0x0002dc         0x1f build/default/production/_ext/633907107/qhsm_top.o
  .debug_pubnames
-                  0x000218         0x39 build/default/production/_ext/1396818886/qa_get_.o
+                  0x0002fb         0x37 build/default/production/_ext/1396818886/qa_defer.o
  .debug_pubnames
-                  0x000251         0x27 build/default/production/_ext/1396818886/qa_lifo.o
+                  0x000332         0x27 build/default/production/_ext/1396818886/qa_fifo.o
  .debug_pubnames
-                  0x000278         0x28 build/default/production/_ext/1396818886/qa_sub.o
+                  0x000359         0x39 build/default/production/_ext/1396818886/qa_get_.o
  .debug_pubnames
-                  0x0002a0         0x2a build/default/production/_ext/1396818886/qa_usub.o
+                  0x000392         0x27 build/default/production/_ext/1396818886/qa_lifo.o
  .debug_pubnames
-                  0x0002ca         0x2d build/default/production/_ext/1396818886/qa_usuba.o
+                  0x0003b9         0x28 build/default/production/_ext/1396818886/qa_sub.o
  .debug_pubnames
-                  0x0002f7         0x27 build/default/production/_ext/1396818886/qeq_fifo.o
+                  0x0003e1         0x2a build/default/production/_ext/1396818886/qa_usub.o
  .debug_pubnames
-                  0x00031e         0x22 build/default/production/_ext/1396818886/qeq_get.o
+                  0x00040b         0x2d build/default/production/_ext/1396818886/qa_usuba.o
  .debug_pubnames
-                  0x000340         0x23 build/default/production/_ext/1396818886/qeq_init.o
+                  0x000438         0x27 build/default/production/_ext/1396818886/qeq_fifo.o
  .debug_pubnames
-                  0x000363         0x27 build/default/production/_ext/1396818886/qeq_lifo.o
+                  0x00045f         0x22 build/default/production/_ext/1396818886/qeq_get.o
  .debug_pubnames
-                  0x00038a         0x62 build/default/production/_ext/1396818886/qf_act.o
+                  0x000481         0x23 build/default/production/_ext/1396818886/qeq_init.o
  .debug_pubnames
-                  0x0003ec         0x1c build/default/production/_ext/1396818886/qf_gc.o
+                  0x0004a4         0x27 build/default/production/_ext/1396818886/qeq_lifo.o
  .debug_pubnames
-                  0x000408         0x22 build/default/production/_ext/1396818886/qf_log2.o
+                  0x0004cb         0x62 build/default/production/_ext/1396818886/qf_act.o
  .debug_pubnames
-                  0x00042a         0x1e build/default/production/_ext/1396818886/qf_new.o
+                  0x00052d         0x1c build/default/production/_ext/1396818886/qf_gc.o
  .debug_pubnames
-                  0x000448         0x3f build/default/production/_ext/1396818886/qf_pool.o
+                  0x000549         0x22 build/default/production/_ext/1396818886/qf_log2.o
  .debug_pubnames
-                  0x000487         0x45 build/default/production/_ext/1396818886/qf_psini.o
+                  0x00056b         0x1e build/default/production/_ext/1396818886/qf_new.o
  .debug_pubnames
-                  0x0004cc         0x21 build/default/production/_ext/1396818886/qf_pspub.o
+                  0x000589         0x3f build/default/production/_ext/1396818886/qf_pool.o
  .debug_pubnames
-                  0x0004ed         0x45 build/default/production/_ext/1396818886/qf_pwr2.o
+                  0x0005c8         0x45 build/default/production/_ext/1396818886/qf_psini.o
  .debug_pubnames
-                  0x000532         0x1e build/default/production/_ext/1396818886/qf_tick.o
+                  0x00060d         0x21 build/default/production/_ext/1396818886/qf_pspub.o
  .debug_pubnames
-                  0x000550         0x36 build/default/production/_ext/1396818886/qmp_get.o
+                  0x00062e         0x45 build/default/production/_ext/1396818886/qf_pwr2.o
  .debug_pubnames
-                  0x000586         0x22 build/default/production/_ext/1396818886/qmp_init.o
+                  0x000673         0x1e build/default/production/_ext/1396818886/qf_tick.o
  .debug_pubnames
-                  0x0005a8         0x21 build/default/production/_ext/1396818886/qmp_put.o
+                  0x000691         0x36 build/default/production/_ext/1396818886/qmp_get.o
  .debug_pubnames
-                  0x0005c9         0x54 build/default/production/_ext/1396818886/qte_arm.o
+                  0x0006c7         0x22 build/default/production/_ext/1396818886/qmp_init.o
  .debug_pubnames
-                  0x00061d         0x24 build/default/production/_ext/1396818886/qte_ctor.o
+                  0x0006e9         0x21 build/default/production/_ext/1396818886/qmp_put.o
  .debug_pubnames
-                  0x000641         0x23 build/default/production/_ext/1396818886/qte_ctr.o
+                  0x00070a         0x54 build/default/production/_ext/1396818886/qte_arm.o
  .debug_pubnames
-                  0x000664         0x26 build/default/production/_ext/1396818886/qte_darm.o
+                  0x00075e         0x24 build/default/production/_ext/1396818886/qte_ctor.o
  .debug_pubnames
-                  0x00068a         0x25 build/default/production/_ext/1396818886/qte_rarm.o
+                  0x000782         0x23 build/default/production/_ext/1396818886/qte_ctr.o
  .debug_pubnames
-                  0x0006af         0x69 build/default/production/_ext/1396818886/qvanilla.o
+                  0x0007a5         0x26 build/default/production/_ext/1396818886/qte_darm.o
  .debug_pubnames
-                  0x000718         0x6f build/default/production/mcc_generated_files/traps.o
+                  0x0007cb         0x25 build/default/production/_ext/1396818886/qte_rarm.o
  .debug_pubnames
-                  0x000787         0x2b build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x0007f0         0x69 build/default/production/_ext/1396818886/qvanilla.o
  .debug_pubnames
-                  0x0007b2         0x42 build/default/production/mcc_generated_files/mcc.o
+                  0x000859         0x6f build/default/production/mcc_generated_files/traps.o
  .debug_pubnames
-                  0x0007f4         0x2d build/default/production/mcc_generated_files/pin_manager.o
+                  0x0008c8         0x2b build/default/production/mcc_generated_files/interrupt_manager.o
  .debug_pubnames
-                  0x000821         0x1b build/default/production/main.o
+                  0x0008f3         0x42 build/default/production/mcc_generated_files/mcc.o
+ .debug_pubnames
+                  0x000935         0x2d build/default/production/mcc_generated_files/pin_manager.o
+ .debug_pubnames
+                  0x000962         0x1b build/default/production/main.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000        0x5c8
+.debug_aranges    0x000000        0x670
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x68 build/default/production/_ext/1360920944/bsp.o
+                  0x000000         0x38 build/default/production/Blinking/Blinky.o
  .debug_aranges
-                  0x000068         0x20 build/default/production/_ext/633907107/qep.o
+                  0x000038         0x68 build/default/production/_ext/1360920944/bsp.o
  .debug_aranges
-                  0x000088         0x20 build/default/production/_ext/633907107/qfsm_dis.o
+                  0x0000a0         0x70 build/default/production/Display/LEDDisplay.o
  .debug_aranges
-                  0x0000a8         0x20 build/default/production/_ext/633907107/qfsm_ini.o
+                  0x000110         0x20 build/default/production/_ext/633907107/qep.o
  .debug_aranges
-                  0x0000c8         0x20 build/default/production/_ext/633907107/qhsm_dis.o
+                  0x000130         0x20 build/default/production/_ext/633907107/qfsm_dis.o
  .debug_aranges
-                  0x0000e8         0x20 build/default/production/_ext/633907107/qhsm_in.o
+                  0x000150         0x20 build/default/production/_ext/633907107/qfsm_ini.o
  .debug_aranges
-                  0x000108         0x20 build/default/production/_ext/633907107/qhsm_ini.o
+                  0x000170         0x20 build/default/production/_ext/633907107/qhsm_dis.o
  .debug_aranges
-                  0x000128         0x20 build/default/production/_ext/633907107/qhsm_top.o
+                  0x000190         0x20 build/default/production/_ext/633907107/qhsm_in.o
  .debug_aranges
-                  0x000148         0x28 build/default/production/_ext/1396818886/qa_defer.o
+                  0x0001b0         0x20 build/default/production/_ext/633907107/qhsm_ini.o
  .debug_aranges
-                  0x000170         0x20 build/default/production/_ext/1396818886/qa_fifo.o
+                  0x0001d0         0x20 build/default/production/_ext/633907107/qhsm_top.o
  .debug_aranges
-                  0x000190         0x28 build/default/production/_ext/1396818886/qa_get_.o
+                  0x0001f0         0x28 build/default/production/_ext/1396818886/qa_defer.o
  .debug_aranges
-                  0x0001b8         0x20 build/default/production/_ext/1396818886/qa_lifo.o
+                  0x000218         0x20 build/default/production/_ext/1396818886/qa_fifo.o
  .debug_aranges
-                  0x0001d8         0x20 build/default/production/_ext/1396818886/qa_sub.o
+                  0x000238         0x28 build/default/production/_ext/1396818886/qa_get_.o
  .debug_aranges
-                  0x0001f8         0x20 build/default/production/_ext/1396818886/qa_usub.o
+                  0x000260         0x20 build/default/production/_ext/1396818886/qa_lifo.o
  .debug_aranges
-                  0x000218         0x20 build/default/production/_ext/1396818886/qa_usuba.o
+                  0x000280         0x20 build/default/production/_ext/1396818886/qa_sub.o
  .debug_aranges
-                  0x000238         0x20 build/default/production/_ext/1396818886/qeq_fifo.o
+                  0x0002a0         0x20 build/default/production/_ext/1396818886/qa_usub.o
  .debug_aranges
-                  0x000258         0x20 build/default/production/_ext/1396818886/qeq_get.o
+                  0x0002c0         0x20 build/default/production/_ext/1396818886/qa_usuba.o
  .debug_aranges
-                  0x000278         0x20 build/default/production/_ext/1396818886/qeq_init.o
+                  0x0002e0         0x20 build/default/production/_ext/1396818886/qeq_fifo.o
  .debug_aranges
-                  0x000298         0x20 build/default/production/_ext/1396818886/qeq_lifo.o
+                  0x000300         0x20 build/default/production/_ext/1396818886/qeq_get.o
  .debug_aranges
-                  0x0002b8         0x30 build/default/production/_ext/1396818886/qf_act.o
+                  0x000320         0x20 build/default/production/_ext/1396818886/qeq_init.o
  .debug_aranges
-                  0x0002e8         0x20 build/default/production/_ext/1396818886/qf_gc.o
+                  0x000340         0x20 build/default/production/_ext/1396818886/qeq_lifo.o
  .debug_aranges
-                  0x000308         0x20 build/default/production/_ext/1396818886/qf_new.o
+                  0x000360         0x30 build/default/production/_ext/1396818886/qf_act.o
  .debug_aranges
-                  0x000328         0x20 build/default/production/_ext/1396818886/qf_pool.o
+                  0x000390         0x20 build/default/production/_ext/1396818886/qf_gc.o
  .debug_aranges
-                  0x000348         0x20 build/default/production/_ext/1396818886/qf_psini.o
+                  0x0003b0         0x20 build/default/production/_ext/1396818886/qf_new.o
  .debug_aranges
-                  0x000368         0x20 build/default/production/_ext/1396818886/qf_pspub.o
+                  0x0003d0         0x20 build/default/production/_ext/1396818886/qf_pool.o
  .debug_aranges
-                  0x000388         0x20 build/default/production/_ext/1396818886/qf_tick.o
+                  0x0003f0         0x20 build/default/production/_ext/1396818886/qf_psini.o
  .debug_aranges
-                  0x0003a8         0x28 build/default/production/_ext/1396818886/qmp_get.o
+                  0x000410         0x20 build/default/production/_ext/1396818886/qf_pspub.o
  .debug_aranges
-                  0x0003d0         0x20 build/default/production/_ext/1396818886/qmp_init.o
+                  0x000430         0x20 build/default/production/_ext/1396818886/qf_tick.o
  .debug_aranges
-                  0x0003f0         0x20 build/default/production/_ext/1396818886/qmp_put.o
+                  0x000450         0x28 build/default/production/_ext/1396818886/qmp_get.o
  .debug_aranges
-                  0x000410         0x28 build/default/production/_ext/1396818886/qte_arm.o
+                  0x000478         0x20 build/default/production/_ext/1396818886/qmp_init.o
  .debug_aranges
-                  0x000438         0x20 build/default/production/_ext/1396818886/qte_ctor.o
+                  0x000498         0x20 build/default/production/_ext/1396818886/qmp_put.o
  .debug_aranges
-                  0x000458         0x20 build/default/production/_ext/1396818886/qte_ctr.o
+                  0x0004b8         0x28 build/default/production/_ext/1396818886/qte_arm.o
  .debug_aranges
-                  0x000478         0x20 build/default/production/_ext/1396818886/qte_darm.o
+                  0x0004e0         0x20 build/default/production/_ext/1396818886/qte_ctor.o
  .debug_aranges
-                  0x000498         0x20 build/default/production/_ext/1396818886/qte_rarm.o
+                  0x000500         0x20 build/default/production/_ext/1396818886/qte_ctr.o
  .debug_aranges
-                  0x0004b8         0x40 build/default/production/_ext/1396818886/qvanilla.o
+                  0x000520         0x20 build/default/production/_ext/1396818886/qte_darm.o
  .debug_aranges
-                  0x0004f8         0x48 build/default/production/mcc_generated_files/traps.o
+                  0x000540         0x20 build/default/production/_ext/1396818886/qte_rarm.o
  .debug_aranges
-                  0x000540         0x20 build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x000560         0x40 build/default/production/_ext/1396818886/qvanilla.o
  .debug_aranges
-                  0x000560         0x28 build/default/production/mcc_generated_files/mcc.o
+                  0x0005a0         0x48 build/default/production/mcc_generated_files/traps.o
  .debug_aranges
-                  0x000588         0x20 build/default/production/mcc_generated_files/pin_manager.o
+                  0x0005e8         0x20 build/default/production/mcc_generated_files/interrupt_manager.o
  .debug_aranges
-                  0x0005a8         0x20 build/default/production/main.o
+                  0x000608         0x28 build/default/production/mcc_generated_files/mcc.o
+ .debug_aranges
+                  0x000630         0x20 build/default/production/mcc_generated_files/pin_manager.o
+ .debug_aranges
+                  0x000650         0x20 build/default/production/main.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -2235,202 +2330,225 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x0005c8       0x1d26
+                  0x000670       0x202d
  .debug_pubtypes
-                  0x0005c8        0x109 build/default/production/_ext/1360920944/bsp.o
+                  0x000670        0x14f build/default/production/Blinking/Blinky.o
  .debug_pubtypes
-                  0x0006d1         0x79 build/default/production/_ext/633907107/qep.o
+                  0x0007bf        0x109 build/default/production/_ext/1360920944/bsp.o
  .debug_pubtypes
-                  0x00074a         0xa8 build/default/production/_ext/633907107/qfsm_dis.o
+                  0x0008c8        0x1fb build/default/production/Display/LEDDisplay.o
  .debug_pubtypes
-                  0x0007f2         0xa8 build/default/production/_ext/633907107/qfsm_ini.o
+                  0x000ac3         0x79 build/default/production/_ext/633907107/qep.o
  .debug_pubtypes
-                  0x00089a         0xc0 build/default/production/_ext/633907107/qhsm_dis.o
+                  0x000b3c         0xa8 build/default/production/_ext/633907107/qfsm_dis.o
  .debug_pubtypes
-                  0x00095a         0xa0 build/default/production/_ext/633907107/qhsm_in.o
+                  0x000be4         0xa8 build/default/production/_ext/633907107/qfsm_ini.o
  .debug_pubtypes
-                  0x0009fa         0xc0 build/default/production/_ext/633907107/qhsm_ini.o
+                  0x000c8c         0xc0 build/default/production/_ext/633907107/qhsm_dis.o
  .debug_pubtypes
-                  0x000aba         0x57 build/default/production/_ext/633907107/qhsm_top.o
+                  0x000d4c         0xa0 build/default/production/_ext/633907107/qhsm_in.o
  .debug_pubtypes
-                  0x000b11         0xd8 build/default/production/_ext/1396818886/qa_defer.o
+                  0x000dec         0xc0 build/default/production/_ext/633907107/qhsm_ini.o
  .debug_pubtypes
-                  0x000be9         0xf1 build/default/production/_ext/1396818886/qa_fifo.o
+                  0x000eac         0x57 build/default/production/_ext/633907107/qhsm_top.o
  .debug_pubtypes
-                  0x000cda         0xfe build/default/production/_ext/1396818886/qa_get_.o
+                  0x000f03         0xd8 build/default/production/_ext/1396818886/qa_defer.o
  .debug_pubtypes
-                  0x000dd8         0xf1 build/default/production/_ext/1396818886/qa_lifo.o
+                  0x000fdb         0xf1 build/default/production/_ext/1396818886/qa_fifo.o
  .debug_pubtypes
-                  0x000ec9        0x11b build/default/production/_ext/1396818886/qa_sub.o
+                  0x0010cc         0xfe build/default/production/_ext/1396818886/qa_get_.o
  .debug_pubtypes
-                  0x000fe4        0x11b build/default/production/_ext/1396818886/qa_usub.o
+                  0x0011ca         0xf1 build/default/production/_ext/1396818886/qa_lifo.o
  .debug_pubtypes
-                  0x0010ff        0x11b build/default/production/_ext/1396818886/qa_usuba.o
+                  0x0012bb        0x11b build/default/production/_ext/1396818886/qa_sub.o
  .debug_pubtypes
-                  0x00121a         0x8b build/default/production/_ext/1396818886/qeq_fifo.o
+                  0x0013d6        0x11b build/default/production/_ext/1396818886/qa_usub.o
  .debug_pubtypes
-                  0x0012a5         0x76 build/default/production/_ext/1396818886/qeq_get.o
+                  0x0014f1        0x11b build/default/production/_ext/1396818886/qa_usuba.o
  .debug_pubtypes
-                  0x00131b         0x76 build/default/production/_ext/1396818886/qeq_init.o
+                  0x00160c         0x8b build/default/production/_ext/1396818886/qeq_fifo.o
  .debug_pubtypes
-                  0x001391         0x8b build/default/production/_ext/1396818886/qeq_lifo.o
+                  0x001697         0x76 build/default/production/_ext/1396818886/qeq_get.o
  .debug_pubtypes
-                  0x00141c         0xd8 build/default/production/_ext/1396818886/qf_act.o
+                  0x00170d         0x76 build/default/production/_ext/1396818886/qeq_init.o
  .debug_pubtypes
-                  0x0014f4         0x97 build/default/production/_ext/1396818886/qf_gc.o
+                  0x001783         0x8b build/default/production/_ext/1396818886/qeq_lifo.o
  .debug_pubtypes
-                  0x00158b         0x1e build/default/production/_ext/1396818886/qf_log2.o
+                  0x00180e         0xd8 build/default/production/_ext/1396818886/qf_act.o
  .debug_pubtypes
-                  0x0015a9         0xaf build/default/production/_ext/1396818886/qf_new.o
+                  0x0018e6         0x97 build/default/production/_ext/1396818886/qf_gc.o
  .debug_pubtypes
-                  0x001658         0x83 build/default/production/_ext/1396818886/qf_pool.o
+                  0x00197d         0x1e build/default/production/_ext/1396818886/qf_log2.o
  .debug_pubtypes
-                  0x0016db         0x59 build/default/production/_ext/1396818886/qf_psini.o
+                  0x00199b         0xaf build/default/production/_ext/1396818886/qf_new.o
  .debug_pubtypes
-                  0x001734        0x106 build/default/production/_ext/1396818886/qf_pspub.o
+                  0x001a4a         0x83 build/default/production/_ext/1396818886/qf_pool.o
  .debug_pubtypes
-                  0x00183a         0x1e build/default/production/_ext/1396818886/qf_pwr2.o
+                  0x001acd         0x59 build/default/production/_ext/1396818886/qf_psini.o
  .debug_pubtypes
-                  0x001858        0x105 build/default/production/_ext/1396818886/qf_tick.o
+                  0x001b26        0x106 build/default/production/_ext/1396818886/qf_pspub.o
  .debug_pubtypes
-                  0x00195d         0x97 build/default/production/_ext/1396818886/qmp_get.o
+                  0x001c2c         0x1e build/default/production/_ext/1396818886/qf_pwr2.o
  .debug_pubtypes
-                  0x0019f4         0x97 build/default/production/_ext/1396818886/qmp_init.o
+                  0x001c4a        0x105 build/default/production/_ext/1396818886/qf_tick.o
  .debug_pubtypes
-                  0x001a8b         0x8a build/default/production/_ext/1396818886/qmp_put.o
+                  0x001d4f         0x97 build/default/production/_ext/1396818886/qmp_get.o
  .debug_pubtypes
-                  0x001b15        0x11a build/default/production/_ext/1396818886/qte_arm.o
+                  0x001de6         0x97 build/default/production/_ext/1396818886/qmp_init.o
  .debug_pubtypes
-                  0x001c2f        0x125 build/default/production/_ext/1396818886/qte_ctor.o
+                  0x001e7d         0x8a build/default/production/_ext/1396818886/qmp_put.o
  .debug_pubtypes
-                  0x001d54         0xf0 build/default/production/_ext/1396818886/qte_ctr.o
+                  0x001f07        0x11a build/default/production/_ext/1396818886/qte_arm.o
  .debug_pubtypes
-                  0x001e44         0xf0 build/default/production/_ext/1396818886/qte_darm.o
+                  0x002021        0x125 build/default/production/_ext/1396818886/qte_ctor.o
  .debug_pubtypes
-                  0x001f34        0x11a build/default/production/_ext/1396818886/qte_rarm.o
+                  0x002146         0xf0 build/default/production/_ext/1396818886/qte_ctr.o
  .debug_pubtypes
-                  0x00204e        0x10a build/default/production/_ext/1396818886/qvanilla.o
+                  0x002236         0xf0 build/default/production/_ext/1396818886/qte_darm.o
  .debug_pubtypes
-                  0x002158         0x4e build/default/production/mcc_generated_files/traps.o
+                  0x002326        0x11a build/default/production/_ext/1396818886/qte_rarm.o
  .debug_pubtypes
-                  0x0021a6         0x12 build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x002440        0x10a build/default/production/_ext/1396818886/qvanilla.o
  .debug_pubtypes
-                  0x0021b8         0x1e build/default/production/mcc_generated_files/mcc.o
+                  0x00254a         0x4e build/default/production/mcc_generated_files/traps.o
  .debug_pubtypes
-                  0x0021d6         0x12 build/default/production/mcc_generated_files/pin_manager.o
+                  0x002598         0x12 build/default/production/mcc_generated_files/interrupt_manager.o
  .debug_pubtypes
-                  0x0021e8        0x106 build/default/production/main.o
+                  0x0025aa         0x1e build/default/production/mcc_generated_files/mcc.o
+ .debug_pubtypes
+                  0x0025c8         0x12 build/default/production/mcc_generated_files/pin_manager.o
+ .debug_pubtypes
+                  0x0025da         0xc3 build/default/production/main.o
 
 __c30_signature
-                  0x0022ee        0x108
+                  0x00269d        0x11a
  __c30_signature
-                  0x0022ee          0x6 build/default/production/_ext/1360920944/bsp.o
+                  0x00269d          0x6 build/default/production/Blinking/Blinky.o
  __c30_signature
-                  0x0022f4          0x6 build/default/production/_ext/633907107/qep.o
+                  0x0026a3          0x6 build/default/production/_ext/1360920944/bsp.o
  __c30_signature
-                  0x0022fa          0x6 build/default/production/_ext/633907107/qfsm_dis.o
+                  0x0026a9          0x6 build/default/production/Display/LEDDisplay.o
  __c30_signature
-                  0x002300          0x6 build/default/production/_ext/633907107/qfsm_ini.o
+                  0x0026af          0x6 build/default/production/_ext/633907107/qep.o
  __c30_signature
-                  0x002306          0x6 build/default/production/_ext/633907107/qhsm_dis.o
+                  0x0026b5          0x6 build/default/production/_ext/633907107/qfsm_dis.o
  __c30_signature
-                  0x00230c          0x6 build/default/production/_ext/633907107/qhsm_in.o
+                  0x0026bb          0x6 build/default/production/_ext/633907107/qfsm_ini.o
  __c30_signature
-                  0x002312          0x6 build/default/production/_ext/633907107/qhsm_ini.o
+                  0x0026c1          0x6 build/default/production/_ext/633907107/qhsm_dis.o
  __c30_signature
-                  0x002318          0x6 build/default/production/_ext/633907107/qhsm_top.o
+                  0x0026c7          0x6 build/default/production/_ext/633907107/qhsm_in.o
  __c30_signature
-                  0x00231e          0x6 build/default/production/_ext/1396818886/qa_defer.o
+                  0x0026cd          0x6 build/default/production/_ext/633907107/qhsm_ini.o
  __c30_signature
-                  0x002324          0x6 build/default/production/_ext/1396818886/qa_fifo.o
+                  0x0026d3          0x6 build/default/production/_ext/633907107/qhsm_top.o
  __c30_signature
-                  0x00232a          0x6 build/default/production/_ext/1396818886/qa_get_.o
+                  0x0026d9          0x6 build/default/production/_ext/1396818886/qa_defer.o
  __c30_signature
-                  0x002330          0x6 build/default/production/_ext/1396818886/qa_lifo.o
+                  0x0026df          0x6 build/default/production/_ext/1396818886/qa_fifo.o
  __c30_signature
-                  0x002336          0x6 build/default/production/_ext/1396818886/qa_sub.o
+                  0x0026e5          0x6 build/default/production/_ext/1396818886/qa_get_.o
  __c30_signature
-                  0x00233c          0x6 build/default/production/_ext/1396818886/qa_usub.o
+                  0x0026eb          0x6 build/default/production/_ext/1396818886/qa_lifo.o
  __c30_signature
-                  0x002342          0x6 build/default/production/_ext/1396818886/qa_usuba.o
+                  0x0026f1          0x6 build/default/production/_ext/1396818886/qa_sub.o
  __c30_signature
-                  0x002348          0x6 build/default/production/_ext/1396818886/qeq_fifo.o
+                  0x0026f7          0x6 build/default/production/_ext/1396818886/qa_usub.o
  __c30_signature
-                  0x00234e          0x6 build/default/production/_ext/1396818886/qeq_get.o
+                  0x0026fd          0x6 build/default/production/_ext/1396818886/qa_usuba.o
  __c30_signature
-                  0x002354          0x6 build/default/production/_ext/1396818886/qeq_init.o
+                  0x002703          0x6 build/default/production/_ext/1396818886/qeq_fifo.o
  __c30_signature
-                  0x00235a          0x6 build/default/production/_ext/1396818886/qeq_lifo.o
+                  0x002709          0x6 build/default/production/_ext/1396818886/qeq_get.o
  __c30_signature
-                  0x002360          0x6 build/default/production/_ext/1396818886/qf_act.o
+                  0x00270f          0x6 build/default/production/_ext/1396818886/qeq_init.o
  __c30_signature
-                  0x002366          0x6 build/default/production/_ext/1396818886/qf_gc.o
+                  0x002715          0x6 build/default/production/_ext/1396818886/qeq_lifo.o
  __c30_signature
-                  0x00236c          0x6 build/default/production/_ext/1396818886/qf_log2.o
+                  0x00271b          0x6 build/default/production/_ext/1396818886/qf_act.o
  __c30_signature
-                  0x002372          0x6 build/default/production/_ext/1396818886/qf_new.o
+                  0x002721          0x6 build/default/production/_ext/1396818886/qf_gc.o
  __c30_signature
-                  0x002378          0x6 build/default/production/_ext/1396818886/qf_pool.o
+                  0x002727          0x6 build/default/production/_ext/1396818886/qf_log2.o
  __c30_signature
-                  0x00237e          0x6 build/default/production/_ext/1396818886/qf_psini.o
+                  0x00272d          0x6 build/default/production/_ext/1396818886/qf_new.o
  __c30_signature
-                  0x002384          0x6 build/default/production/_ext/1396818886/qf_pspub.o
+                  0x002733          0x6 build/default/production/_ext/1396818886/qf_pool.o
  __c30_signature
-                  0x00238a          0x6 build/default/production/_ext/1396818886/qf_pwr2.o
+                  0x002739          0x6 build/default/production/_ext/1396818886/qf_psini.o
  __c30_signature
-                  0x002390          0x6 build/default/production/_ext/1396818886/qf_tick.o
+                  0x00273f          0x6 build/default/production/_ext/1396818886/qf_pspub.o
  __c30_signature
-                  0x002396          0x6 build/default/production/_ext/1396818886/qmp_get.o
+                  0x002745          0x6 build/default/production/_ext/1396818886/qf_pwr2.o
  __c30_signature
-                  0x00239c          0x6 build/default/production/_ext/1396818886/qmp_init.o
+                  0x00274b          0x6 build/default/production/_ext/1396818886/qf_tick.o
  __c30_signature
-                  0x0023a2          0x6 build/default/production/_ext/1396818886/qmp_put.o
+                  0x002751          0x6 build/default/production/_ext/1396818886/qmp_get.o
  __c30_signature
-                  0x0023a8          0x6 build/default/production/_ext/1396818886/qte_arm.o
+                  0x002757          0x6 build/default/production/_ext/1396818886/qmp_init.o
  __c30_signature
-                  0x0023ae          0x6 build/default/production/_ext/1396818886/qte_ctor.o
+                  0x00275d          0x6 build/default/production/_ext/1396818886/qmp_put.o
  __c30_signature
-                  0x0023b4          0x6 build/default/production/_ext/1396818886/qte_ctr.o
+                  0x002763          0x6 build/default/production/_ext/1396818886/qte_arm.o
  __c30_signature
-                  0x0023ba          0x6 build/default/production/_ext/1396818886/qte_darm.o
+                  0x002769          0x6 build/default/production/_ext/1396818886/qte_ctor.o
  __c30_signature
-                  0x0023c0          0x6 build/default/production/_ext/1396818886/qte_rarm.o
+                  0x00276f          0x6 build/default/production/_ext/1396818886/qte_ctr.o
  __c30_signature
-                  0x0023c6          0x6 build/default/production/_ext/1396818886/qvanilla.o
+                  0x002775          0x6 build/default/production/_ext/1396818886/qte_darm.o
  __c30_signature
-                  0x0023cc          0x6 build/default/production/mcc_generated_files/traps.o
+                  0x00277b          0x6 build/default/production/_ext/1396818886/qte_rarm.o
  __c30_signature
-                  0x0023d2          0x6 build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x002781          0x6 build/default/production/_ext/1396818886/qvanilla.o
  __c30_signature
-                  0x0023d8          0x6 build/default/production/mcc_generated_files/mcc.o
+                  0x002787          0x6 build/default/production/mcc_generated_files/traps.o
  __c30_signature
-                  0x0023de          0x6 build/default/production/mcc_generated_files/pin_manager.o
+                  0x00278d          0x6 build/default/production/mcc_generated_files/interrupt_manager.o
  __c30_signature
-                  0x0023e4          0x6 build/default/production/main.o
+                  0x002793          0x6 build/default/production/mcc_generated_files/mcc.o
  __c30_signature
-                  0x0023ea          0x6 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
+                  0x002799          0x6 build/default/production/mcc_generated_files/pin_manager.o
  __c30_signature
-                  0x0023f0          0x6 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(data_init_24.o)
+                  0x00279f          0x6 build/default/production/main.o
+ __c30_signature
+                  0x0027a5          0x6 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
+ __c30_signature
+                  0x0027ab          0x6 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(data_init_24.o)
+ __c30_signature
+                  0x0027b1          0x6 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-c-elf.a(memcpy.DA_eo)
 
-.bss                0x0800         0x60
- .bss               0x0800         0x20 build/default/production/_ext/1396818886/qf_pool.o
-                    0x0800                  _QF_pool_
-                    0x081e                  _QF_maxPool_
- .bss               0x0820         0x20 build/default/production/mcc_generated_files/traps.o
- .bss               0x0840         0x14 build/default/production/_ext/1396818886/qf_act.o
-                    0x0840                  _QF_active_
-                    0x0852                  _QF_intLockNest_
- .bss               0x0854          0x4 build/default/production/_ext/1360920944/bsp.o
- .bss               0x0858          0x4 build/default/production/_ext/1396818886/qf_psini.o
-                    0x0858                  _QF_subscrList_
-                    0x085a                  _QF_maxSignal_
- .bss               0x085c          0x2 build/default/production/_ext/1396818886/qte_arm.o
-                    0x085c                  _QF_timeEvtListHead_
- .bss               0x085e          0x2 build/default/production/_ext/1396818886/qvanilla.o
-                    0x085e                  _QF_readySet_
+.bss                0x0800        0x104
+ .bss               0x0800         0x4e build/default/production/Display/LEDDisplay.o
+                    0x0830                  _DebugInfoString
+ .bss               0x084e         0x32 build/default/production/Blinking/Blinky.o
+                    0x086c                  _BlinkyDebugString
+ .bss               0x0880         0x28 build/default/production/main.o
+ .bss               0x08a8         0x20 build/default/production/_ext/1396818886/qf_pool.o
+                    0x08a8                  _QF_pool_
+                    0x08c6                  _QF_maxPool_
+ .bss               0x08c8         0x20 build/default/production/mcc_generated_files/traps.o
+ .bss               0x08e8         0x14 build/default/production/_ext/1396818886/qf_act.o
+                    0x08e8                  _QF_active_
+                    0x08fa                  _QF_intLockNest_
+ .bss               0x08fc          0x4 build/default/production/_ext/1360920944/bsp.o
+ .bss               0x0900          0x4 build/default/production/_ext/1396818886/qf_psini.o
+                    0x0900                  _QF_subscrList_
+                    0x0902                  _QF_maxSignal_
 
-.data               0x0860          0x2
- .data              0x0860          0x2 build/default/production/mcc_generated_files/traps.o
+.data               0x0904          0x4
+ .data              0x0904          0x2 build/default/production/Blinking/Blinky.o
+                    0x0904                  _AO_Blinky
+ .data              0x0906          0x2 build/default/production/Display/LEDDisplay.o
+                    0x0906                  _AO_LEDDisplay
+
+.bss                0x0908          0x4
+ .bss               0x0908          0x2 build/default/production/_ext/1396818886/qte_arm.o
+                    0x0908                  _QF_timeEvtListHead_
+ .bss               0x090a          0x2 build/default/production/_ext/1396818886/qvanilla.o
+                    0x090a                  _QF_readySet_
+
+.data               0x090c          0x2
+ .data              0x090c          0x2 build/default/production/mcc_generated_files/traps.o
 
 .ivt._T2Interrupt
                   0x000022          0x2
@@ -2472,384 +2590,482 @@ __c30_signature
  .config_IOL1WAY
                   0x0157f8          0x2 build/default/production/mcc_generated_files/mcc.o
 
-.const              0x8382        0x2e0 load address 0x000382  
- .const             0x8382        0x100 build/default/production/_ext/1396818886/qf_log2.o
-                    0x8382                  _QF_log2Lkup
- .const             0x8482         0xc4 build/default/production/_ext/1396818886/qf_pwr2.o
-                    0x8482                  _QF_pwr2Lkup
-                    0x84c3                  _QF_invPwr2Lkup
-                    0x8504                  _QF_div8Lkup
- .const             0x8546         0x18 build/default/production/_ext/633907107/qep.o
-                    0x8546                  _QEP_reservedEvt_
- .const             0x855e          0xe build/default/production/_ext/1360920944/bsp.o
- .const             0x856c          0xe build/default/production/_ext/1396818886/qf_act.o
- .const             0x857a          0xa build/default/production/_ext/633907107/qfsm_dis.o
- .const             0x8584          0xa build/default/production/_ext/633907107/qfsm_ini.o
- .const             0x858e          0xa build/default/production/_ext/633907107/qhsm_dis.o
- .const             0x8598          0xa build/default/production/_ext/633907107/qhsm_ini.o
- .const             0x85a2          0xa build/default/production/_ext/1396818886/qa_defer.o
- .const             0x85ac          0xa build/default/production/_ext/1396818886/qa_usuba.o
- .const             0x85b6          0xa build/default/production/_ext/1396818886/qeq_fifo.o
- .const             0x85c0          0xa build/default/production/_ext/1396818886/qeq_lifo.o
- .const             0x85ca          0xa build/default/production/_ext/1396818886/qf_pspub.o
- .const             0x85d4          0xa build/default/production/_ext/1396818886/qmp_init.o
- .const             0x85de          0xa build/default/production/_ext/1396818886/qte_ctor.o
- .const             0x85e8          0xa build/default/production/_ext/1396818886/qte_rarm.o
- .const             0x85f2          0xa build/default/production/_ext/1396818886/qvanilla.o
- .const             0x85fc          0x8 build/default/production/_ext/633907107/qhsm_in.o
- .const             0x8604          0x8 build/default/production/_ext/1396818886/qa_fifo.o
- .const             0x860c          0x8 build/default/production/_ext/1396818886/qa_get_.o
- .const             0x8614          0x8 build/default/production/_ext/1396818886/qa_lifo.o
- .const             0x861c          0x8 build/default/production/_ext/1396818886/qa_sub.o
- .const             0x8624          0x8 build/default/production/_ext/1396818886/qa_usub.o
- .const             0x862c          0x8 build/default/production/_ext/1396818886/qf_new.o
- .const             0x8634          0x8 build/default/production/_ext/1396818886/qf_pool.o
- .const             0x863c          0x8 build/default/production/_ext/1396818886/qf_tick.o
- .const             0x8644          0x8 build/default/production/_ext/1396818886/qmp_get.o
- .const             0x864c          0x8 build/default/production/_ext/1396818886/qmp_put.o
- .const             0x8654          0x8 build/default/production/_ext/1396818886/qte_arm.o
- .const             0x865c          0x6 build/default/production/_ext/1396818886/qf_gc.o
+.const              0x83a4        0x3fc load address 0x0003a4  
+ .const             0x83a4        0x100 build/default/production/_ext/1396818886/qf_log2.o
+                    0x83a4                  _QF_log2Lkup
+ .const             0x84a4         0xc4 build/default/production/_ext/1396818886/qf_pwr2.o
+                    0x84a4                  _QF_pwr2Lkup
+                    0x84e5                  _QF_invPwr2Lkup
+                    0x8526                  _QF_div8Lkup
+ .const             0x8568         0xbc build/default/production/Display/LEDDisplay.o
+                    0x8568                  _SegOnesEnterString
+                    0x8580                  _SegTensEnterString
+                    0x8598                  _SegHunsEnterString
+                    0x85b0                  _SegThosEnterString
+                    0x85c8                  _SegOnesExitString
+                    0x85df                  _SegTensExitString
+                    0x85f6                  _SegHunsExitString
+                    0x860d                  _SegThosExitString
+ .const             0x8624         0x60 build/default/production/Blinking/Blinky.o
+ .const             0x8684         0x18 build/default/production/_ext/633907107/qep.o
+                    0x8684                  _QEP_reservedEvt_
+ .const             0x869c          0xe build/default/production/_ext/1360920944/bsp.o
+ .const             0x86aa          0xe build/default/production/_ext/1396818886/qf_act.o
+ .const             0x86b8          0xa build/default/production/_ext/633907107/qfsm_dis.o
+ .const             0x86c2          0xa build/default/production/_ext/633907107/qfsm_ini.o
+ .const             0x86cc          0xa build/default/production/_ext/633907107/qhsm_dis.o
+ .const             0x86d6          0xa build/default/production/_ext/633907107/qhsm_ini.o
+ .const             0x86e0          0xa build/default/production/_ext/1396818886/qa_defer.o
+ .const             0x86ea          0xa build/default/production/_ext/1396818886/qa_usuba.o
+ .const             0x86f4          0xa build/default/production/_ext/1396818886/qeq_fifo.o
+ .const             0x86fe          0xa build/default/production/_ext/1396818886/qeq_lifo.o
+ .const             0x8708          0xa build/default/production/_ext/1396818886/qf_pspub.o
+ .const             0x8712          0xa build/default/production/_ext/1396818886/qmp_init.o
+ .const             0x871c          0xa build/default/production/_ext/1396818886/qte_ctor.o
+ .const             0x8726          0xa build/default/production/_ext/1396818886/qte_rarm.o
+ .const             0x8730          0xa build/default/production/_ext/1396818886/qvanilla.o
+ .const             0x873a          0x8 build/default/production/_ext/633907107/qhsm_in.o
+ .const             0x8742          0x8 build/default/production/_ext/1396818886/qa_fifo.o
+ .const             0x874a          0x8 build/default/production/_ext/1396818886/qa_get_.o
+ .const             0x8752          0x8 build/default/production/_ext/1396818886/qa_lifo.o
+ .const             0x875a          0x8 build/default/production/_ext/1396818886/qa_sub.o
+ .const             0x8762          0x8 build/default/production/_ext/1396818886/qa_usub.o
+ .const             0x876a          0x8 build/default/production/_ext/1396818886/qf_new.o
+ .const             0x8772          0x8 build/default/production/_ext/1396818886/qf_pool.o
+ .const             0x877a          0x8 build/default/production/_ext/1396818886/qf_tick.o
+ .const             0x8782          0x8 build/default/production/_ext/1396818886/qmp_get.o
+ .const             0x878a          0x8 build/default/production/_ext/1396818886/qmp_put.o
+ .const             0x8792          0x8 build/default/production/_ext/1396818886/qte_arm.o
+ .const             0x879a          0x6 build/default/production/_ext/1396818886/qf_gc.o
 
 .text.QHsm_dispatch
-                  0x000662        0x2a6
+                  0x0007a0        0x2a6
  .text.QHsm_dispatch
-                  0x000662        0x2a6 build/default/production/_ext/633907107/qhsm_dis.o
-                  0x000662                  _QHsm_dispatch
+                  0x0007a0        0x2a6 build/default/production/_ext/633907107/qhsm_dis.o
+                  0x0007a0                  _QHsm_dispatch
+
+.text.LDD_Char2SegmentConvert
+                  0x000a46        0x19a
+ .text.LDD_Char2SegmentConvert
+                  0x000a46        0x19a build/default/production/Display/LEDDisplay.o
+
+.text.Double_dabble
+                  0x000be0        0x126
+ .text.Double_dabble
+                  0x000be0        0x126 build/default/production/Display/LEDDisplay.o
 
 .text.QMPool_init
-                  0x000908        0x106
+                  0x000d06        0x106
  .text.QMPool_init
-                  0x000908        0x106 build/default/production/_ext/1396818886/qmp_init.o
-                  0x000908                  _QMPool_init
+                  0x000d06        0x106 build/default/production/_ext/1396818886/qmp_init.o
+                  0x000d06                  _QMPool_init
 
-.text.QF_tick     0x000a0e         0xce
- .text.QF_tick    0x000a0e         0xce build/default/production/_ext/1396818886/qf_tick.o
-                  0x000a0e                  _QF_tick
+.text.QF_tick     0x000e0c         0xce
+ .text.QF_tick    0x000e0c         0xce build/default/production/_ext/1396818886/qf_tick.o
+                  0x000e0c                  _QF_tick
 
 .text.QHsm_init
-                  0x000adc         0xc4
+                  0x000eda         0xc4
  .text.QHsm_init
-                  0x000adc         0xc4 build/default/production/_ext/633907107/qhsm_ini.o
-                  0x000adc                  _QHsm_init
+                  0x000eda         0xc4 build/default/production/_ext/633907107/qhsm_ini.o
+                  0x000eda                  _QHsm_init
 
 .text.QActive_postLIFO
-                  0x000ba0         0xa8
+                  0x000f9e         0xa8
  .text.QActive_postLIFO
-                  0x000ba0         0xa8 build/default/production/_ext/1396818886/qa_lifo.o
-                  0x000ba0                  _QActive_postLIFO
+                  0x000f9e         0xa8 build/default/production/_ext/1396818886/qa_lifo.o
+                  0x000f9e                  _QActive_postLIFO
+
+.text.Display_Active
+                  0x001046         0xa4
+ .text.Display_Active
+                  0x001046         0xa4 build/default/production/Display/LEDDisplay.o
+                  0x001046                  build/default/production/Display/LEDDisplay.o:_Display_Active
 
 .text.QActive_postFIFO
-                  0x000c48         0x9e
+                  0x0010ea         0x9e
  .text.QActive_postFIFO
-                  0x000c48         0x9e build/default/production/_ext/1396818886/qa_fifo.o
-                  0x000c48                  _QActive_postFIFO
+                  0x0010ea         0x9e build/default/production/_ext/1396818886/qa_fifo.o
+                  0x0010ea                  _QActive_postFIFO
+
+.text.Display_SegOnes
+                  0x001188         0x90
+ .text.Display_SegOnes
+                  0x001188         0x90 build/default/production/Display/LEDDisplay.o
+                  0x001188                  build/default/production/Display/LEDDisplay.o:_Display_SegOnes
+
+.text.Display_SegTens
+                  0x001218         0x90
+ .text.Display_SegTens
+                  0x001218         0x90 build/default/production/Display/LEDDisplay.o
+                  0x001218                  build/default/production/Display/LEDDisplay.o:_Display_SegTens
+
+.text.Display_SegHundreds
+                  0x0012a8         0x90
+ .text.Display_SegHundreds
+                  0x0012a8         0x90 build/default/production/Display/LEDDisplay.o
+                  0x0012a8                  build/default/production/Display/LEDDisplay.o:_Display_SegHundreds
+
+.text.Display_SegThousands
+                  0x001338         0x90
+ .text.Display_SegThousands
+                  0x001338         0x90 build/default/production/Display/LEDDisplay.o
+                  0x001338                  build/default/production/Display/LEDDisplay.o:_Display_SegThousands
 
 .text.QActive_unsubscribeAll
-                  0x000ce6         0x8e
+                  0x0013c8         0x8e
  .text.QActive_unsubscribeAll
-                  0x000ce6         0x8e build/default/production/_ext/1396818886/qa_usuba.o
-                  0x000ce6                  _QActive_unsubscribeAll
+                  0x0013c8         0x8e build/default/production/_ext/1396818886/qa_usuba.o
+                  0x0013c8                  _QActive_unsubscribeAll
 
 .text.QEQueue_postLIFO
-                  0x000d74         0x8c
+                  0x001456         0x8c
  .text.QEQueue_postLIFO
-                  0x000d74         0x8c build/default/production/_ext/1396818886/qeq_lifo.o
-                  0x000d74                  _QEQueue_postLIFO
+                  0x001456         0x8c build/default/production/_ext/1396818886/qeq_lifo.o
+                  0x001456                  _QEQueue_postLIFO
 
 .text.QEQueue_postFIFO
-                  0x000e00         0x8a
+                  0x0014e2         0x8a
  .text.QEQueue_postFIFO
-                  0x000e00         0x8a build/default/production/_ext/1396818886/qeq_fifo.o
-                  0x000e00                  _QEQueue_postFIFO
+                  0x0014e2         0x8a build/default/production/_ext/1396818886/qeq_fifo.o
+                  0x0014e2                  _QEQueue_postFIFO
 
 .text.QF_publish
-                  0x000e8a         0x86
+                  0x00156c         0x86
  .text.QF_publish
-                  0x000e8a         0x86 build/default/production/_ext/1396818886/qf_pspub.o
-                  0x000e8a                  _QF_publish
+                  0x00156c         0x86 build/default/production/_ext/1396818886/qf_pspub.o
+                  0x00156c                  _QF_publish
 
 .text.QActive_get_
-                  0x000f10         0x84
+                  0x0015f2         0x84
  .text.QActive_get_
-                  0x000f10         0x84 build/default/production/_ext/1396818886/qa_get_.o
-                  0x000f10                  _QActive_get_
+                  0x0015f2         0x84 build/default/production/_ext/1396818886/qa_get_.o
+                  0x0015f2                  _QActive_get_
+
+.text.Blinky_On
+                  0x001676         0x7e
+ .text.Blinky_On
+                  0x001676         0x7e build/default/production/Blinking/Blinky.o
+                  0x001676                  build/default/production/Blinking/Blinky.o:_Blinky_On
+
+.text.Blinky_Off
+                  0x0016f4         0x7e
+ .text.Blinky_Off
+                  0x0016f4         0x7e build/default/production/Blinking/Blinky.o
+                  0x0016f4                  build/default/production/Blinking/Blinky.o:_Blinky_Off
 
 .text.QF_poolInit
-                  0x000f94         0x74
+                  0x001772         0x74
  .text.QF_poolInit
-                  0x000f94         0x74 build/default/production/_ext/1396818886/qf_pool.o
-                  0x000f94                  _QF_poolInit
+                  0x001772         0x74 build/default/production/_ext/1396818886/qf_pool.o
+                  0x001772                  _QF_poolInit
+
+.text.Display_Paused
+                  0x0017e6         0x70
+ .text.Display_Paused
+                  0x0017e6         0x70 build/default/production/Display/LEDDisplay.o
+                  0x0017e6                  build/default/production/Display/LEDDisplay.o:_Display_Paused
 
 .text.QActive_subscribe
-                  0x001008         0x6e
+                  0x001856         0x6e
  .text.QActive_subscribe
-                  0x001008         0x6e build/default/production/_ext/1396818886/qa_sub.o
-                  0x001008                  _QActive_subscribe
+                  0x001856         0x6e build/default/production/_ext/1396818886/qa_sub.o
+                  0x001856                  _QActive_subscribe
 
 .text.QActive_unsubscribe
-                  0x001076         0x6e
+                  0x0018c4         0x6e
  .text.QActive_unsubscribe
-                  0x001076         0x6e build/default/production/_ext/1396818886/qa_usub.o
-                  0x001076                  _QActive_unsubscribe
+                  0x0018c4         0x6e build/default/production/_ext/1396818886/qa_usub.o
+                  0x0018c4                  _QActive_unsubscribe
 
 .text.QEQueue_get
-                  0x0010e4         0x6c
+                  0x001932         0x6c
  .text.QEQueue_get
-                  0x0010e4         0x6c build/default/production/_ext/1396818886/qeq_get.o
-                  0x0010e4                  _QEQueue_get
+                  0x001932         0x6c build/default/production/_ext/1396818886/qeq_get.o
+                  0x001932                  _QEQueue_get
 
-.text.QF_new_     0x001150         0x6a
- .text.QF_new_    0x001150         0x6a build/default/production/_ext/1396818886/qf_new.o
-                  0x001150                  _QF_new_
+.text.QF_new_     0x00199e         0x6a
+ .text.QF_new_    0x00199e         0x6a build/default/production/_ext/1396818886/qf_new.o
+                  0x00199e                  _QF_new_
 
 .text.QTimeEvt_rearm
-                  0x0011ba         0x62
+                  0x001a08         0x62
  .text.QTimeEvt_rearm
-                  0x0011ba         0x62 build/default/production/_ext/1396818886/qte_rarm.o
-                  0x0011ba                  _QTimeEvt_rearm
+                  0x001a08         0x62 build/default/production/_ext/1396818886/qte_rarm.o
+                  0x001a08                  _QTimeEvt_rearm
 
 .text.QTimeEvt_arm_
-                  0x00121c         0x5c
+                  0x001a6a         0x5c
  .text.QTimeEvt_arm_
-                  0x00121c         0x5c build/default/production/_ext/1396818886/qte_arm.o
-                  0x00121c                  _QTimeEvt_arm_
+                  0x001a6a         0x5c build/default/production/_ext/1396818886/qte_arm.o
+                  0x001a6a                  _QTimeEvt_arm_
+
+.text.Display_OFF
+                  0x001ac6         0x58
+ .text.Display_OFF
+                  0x001ac6         0x58 build/default/production/Display/LEDDisplay.o
+                  0x001ac6                  build/default/production/Display/LEDDisplay.o:_Display_OFF
 
 .text.QMPool_put
-                  0x001278         0x56
+                  0x001b1e         0x56
  .text.QMPool_put
-                  0x001278         0x56 build/default/production/_ext/1396818886/qmp_put.o
-                  0x001278                  _QMPool_put
+                  0x001b1e         0x56 build/default/production/_ext/1396818886/qmp_put.o
+                  0x001b1e                  _QMPool_put
+
+.dinit            0x001b74         0x56
+ .dinit           0x001b74         0x56 data_init
 
 .text.QActive_start
-                  0x0012ce         0x54
+                  0x001bca         0x54
  .text.QActive_start
-                  0x0012ce         0x54 build/default/production/_ext/1396818886/qvanilla.o
-                  0x0012ce                  _QActive_start
+                  0x001bca         0x54 build/default/production/_ext/1396818886/qvanilla.o
+                  0x001bca                  _QActive_start
 
 .text.QHsm_isIn
-                  0x001322         0x52
+                  0x001c1e         0x52
  .text.QHsm_isIn
-                  0x001322         0x52 build/default/production/_ext/633907107/qhsm_in.o
-                  0x001322                  _QHsm_isIn
+                  0x001c1e         0x52 build/default/production/_ext/633907107/qhsm_in.o
+                  0x001c1e                  _QHsm_isIn
 
 .text.QActive_recall
-                  0x001374         0x52
+                  0x001c70         0x52
  .text.QActive_recall
-                  0x001374         0x52 build/default/production/_ext/1396818886/qa_defer.o
-                  0x001374                  _QActive_recall
+                  0x001c70         0x52 build/default/production/_ext/1396818886/qa_defer.o
+                  0x001c70                  _QActive_recall
 
-.text.QF_gc       0x0013c6         0x52
- .text.QF_gc      0x0013c6         0x52 build/default/production/_ext/1396818886/qf_gc.o
-                  0x0013c6                  _QF_gc
+.text.QF_gc       0x001cc2         0x52
+ .text.QF_gc      0x001cc2         0x52 build/default/production/_ext/1396818886/qf_gc.o
+                  0x001cc2                  _QF_gc
 
 .text.QMPool_get
-                  0x001418         0x50
+                  0x001d14         0x50
  .text.QMPool_get
-                  0x001418         0x50 build/default/production/_ext/1396818886/qmp_get.o
-                  0x001418                  _QMPool_get
+                  0x001d14         0x50 build/default/production/_ext/1396818886/qmp_get.o
+                  0x001d14                  _QMPool_get
+
+.text.main        0x001d64         0x50
+ .text.main       0x001d64         0x50 build/default/production/main.o
+                  0x001d64                  _main
 
 .text.QFsm_dispatch
-                  0x001468         0x4c
+                  0x001db4         0x4c
  .text.QFsm_dispatch
-                  0x001468         0x4c build/default/production/_ext/633907107/qfsm_dis.o
-                  0x001468                  _QFsm_dispatch
+                  0x001db4         0x4c build/default/production/_ext/633907107/qfsm_dis.o
+                  0x001db4                  _QFsm_dispatch
 
 .text.QFsm_init
-                  0x0014b4         0x4a
+                  0x001e00         0x4a
  .text.QFsm_init
-                  0x0014b4         0x4a build/default/production/_ext/633907107/qfsm_ini.o
-                  0x0014b4                  _QFsm_init
+                  0x001e00         0x4a build/default/production/_ext/633907107/qfsm_ini.o
+                  0x001e00                  _QFsm_init
 
-.text.QF_run      0x0014fe         0x48
- .text.QF_run     0x0014fe         0x48 build/default/production/_ext/1396818886/qvanilla.o
-                  0x0014fe                  _QF_run
+.text.Display_Init
+                  0x001e4a         0x48
+ .text.Display_Init
+                  0x001e4a         0x48 build/default/production/Display/LEDDisplay.o
+                  0x001e4a                  build/default/production/Display/LEDDisplay.o:_Display_Init
+
+.text.QF_run      0x001e92         0x48
+ .text.QF_run     0x001e92         0x48 build/default/production/_ext/1396818886/qvanilla.o
+                  0x001e92                  _QF_run
 
 .text.QF_remove_
-                  0x001546         0x42
+                  0x001eda         0x42
  .text.QF_remove_
-                  0x001546         0x42 build/default/production/_ext/1396818886/qf_act.o
-                  0x001546                  _QF_remove_
+                  0x001eda         0x42 build/default/production/_ext/1396818886/qf_act.o
+                  0x001eda                  _QF_remove_
 
 .text.QTimeEvt_ctor
-                  0x001588         0x42
+                  0x001f1c         0x42
  .text.QTimeEvt_ctor
-                  0x001588         0x42 build/default/production/_ext/1396818886/qte_ctor.o
-                  0x001588                  _QTimeEvt_ctor
+                  0x001f1c         0x42 build/default/production/_ext/1396818886/qte_ctor.o
+                  0x001f1c                  _QTimeEvt_ctor
 
 .text.QF_getQueueMargin
-                  0x0015ca         0x40
+                  0x001f5e         0x40
  .text.QF_getQueueMargin
-                  0x0015ca         0x40 build/default/production/_ext/1396818886/qa_get_.o
-                  0x0015ca                  _QF_getQueueMargin
+                  0x001f5e         0x40 build/default/production/_ext/1396818886/qa_get_.o
+                  0x001f5e                  _QF_getQueueMargin
 
-.text.QF_add_     0x00160a         0x40
- .text.QF_add_    0x00160a         0x40 build/default/production/_ext/1396818886/qf_act.o
-                  0x00160a                  _QF_add_
+.text.QF_add_     0x001f9e         0x40
+ .text.QF_add_    0x001f9e         0x40 build/default/production/_ext/1396818886/qf_act.o
+                  0x001f9e                  _QF_add_
 
 .text.QF_getPoolMargin
-                  0x00164a         0x3e
+                  0x001fde         0x3e
  .text.QF_getPoolMargin
-                  0x00164a         0x3e build/default/production/_ext/1396818886/qmp_get.o
-                  0x00164a                  _QF_getPoolMargin
-
-.text.QEQueue_init
-                  0x001688         0x36
- .text.QEQueue_init
-                  0x001688         0x36 build/default/production/_ext/1396818886/qeq_init.o
-                  0x001688                  _QEQueue_init
+                  0x001fde         0x3e build/default/production/_ext/1396818886/qmp_get.o
+                  0x001fde                  _QF_getPoolMargin
 
 .text.PIN_MANAGER_Initialize
-                  0x0016be         0x36
+                  0x00201c         0x3e
  .text.PIN_MANAGER_Initialize
-                  0x0016be         0x36 build/default/production/mcc_generated_files/pin_manager.o
-                  0x0016be                  _PIN_MANAGER_Initialize
+                  0x00201c         0x3e build/default/production/mcc_generated_files/pin_manager.o
+                  0x00201c                  _PIN_MANAGER_Initialize
 
-.dinit            0x0016f4         0x34
- .dinit           0x0016f4         0x34 data_init
-
-.text.main        0x001728         0x30
- .text.main       0x001728         0x30 build/default/production/main.o
-                  0x001728                  _main
+.text.QEQueue_init
+                  0x00205a         0x36
+ .text.QEQueue_init
+                  0x00205a         0x36 build/default/production/_ext/1396818886/qeq_init.o
+                  0x00205a                  _QEQueue_init
 
 .text.BSP_random
-                  0x001758         0x2e
+                  0x002090         0x2e
  .text.BSP_random
-                  0x001758         0x2e build/default/production/_ext/1360920944/bsp.o
-                  0x001758                  _BSP_random
+                  0x002090         0x2e build/default/production/_ext/1360920944/bsp.o
+                  0x002090                  _BSP_random
+
+.text.Blinky_init
+                  0x0020be         0x2a
+ .text.Blinky_init
+                  0x0020be         0x2a build/default/production/Blinking/Blinky.o
+                  0x0020be                  build/default/production/Blinking/Blinky.o:_Blinky_init
+
+.text.DisplayCtor
+                  0x0020e8         0x2a
+ .text.DisplayCtor
+                  0x0020e8         0x2a build/default/production/Display/LEDDisplay.o
+                  0x0020e8                  _DisplayCtor
 
 .text.QTimeEvt_disarm
-                  0x001786         0x26
+                  0x002112         0x26
  .text.QTimeEvt_disarm
-                  0x001786         0x26 build/default/production/_ext/1396818886/qte_darm.o
-                  0x001786                  _QTimeEvt_disarm
+                  0x002112         0x26 build/default/production/_ext/1396818886/qte_darm.o
+                  0x002112                  _QTimeEvt_disarm
+
+.text.BlinkyCtor
+                  0x002138         0x20
+ .text.BlinkyCtor
+                  0x002138         0x20 build/default/production/Blinking/Blinky.o
+                  0x002138                  _BlinkyCtor
 
 .text.OSCILLATOR_Initialize
-                  0x0017ac         0x22
+                  0x002158         0x20
  .text.OSCILLATOR_Initialize
-                  0x0017ac         0x22 build/default/production/mcc_generated_files/mcc.o
-                  0x0017ac                  _OSCILLATOR_Initialize
+                  0x002158         0x20 build/default/production/mcc_generated_files/mcc.o
+                  0x002158                  _OSCILLATOR_Initialize
 
 .text.QF_onStartup
-                  0x0017ce         0x20
+                  0x002178         0x1e
  .text.QF_onStartup
-                  0x0017ce         0x20 build/default/production/_ext/1360920944/bsp.o
-                  0x0017ce                  _QF_onStartup
+                  0x002178         0x1e build/default/production/_ext/1360920944/bsp.o
+                  0x002178                  _QF_onStartup
 
 .text.QActive_defer
-                  0x0017ee         0x14
+                  0x002196         0x14
  .text.QActive_defer
-                  0x0017ee         0x14 build/default/production/_ext/1396818886/qa_defer.o
-                  0x0017ee                  _QActive_defer
+                  0x002196         0x14 build/default/production/_ext/1396818886/qa_defer.o
+                  0x002196                  _QActive_defer
 
 .text.QF_psInit
-                  0x001802         0x14
+                  0x0021aa         0x14
  .text.QF_psInit
-                  0x001802         0x14 build/default/production/_ext/1396818886/qf_psini.o
-                  0x001802                  _QF_psInit
+                  0x0021aa         0x14 build/default/production/_ext/1396818886/qf_psini.o
+                  0x0021aa                  _QF_psInit
 
 .text.QTimeEvt_ctr
-                  0x001816         0x14
+                  0x0021be         0x14
  .text.QTimeEvt_ctr
-                  0x001816         0x14 build/default/production/_ext/1396818886/qte_ctr.o
-                  0x001816                  _QTimeEvt_ctr
+                  0x0021be         0x14 build/default/production/_ext/1396818886/qte_ctr.o
+                  0x0021be                  _QTimeEvt_ctr
 
-.text.BSP_init    0x00182a         0x12
+.text.BSP_init    0x0021d2         0x12
  .text.BSP_init
-                  0x00182a         0x12 build/default/production/_ext/1360920944/bsp.o
-                  0x00182a                  _BSP_init
+                  0x0021d2         0x12 build/default/production/_ext/1360920944/bsp.o
+                  0x0021d2                  _BSP_init
 
 .text.QF_noTimeEvtsActive
-                  0x00183c         0x12
+                  0x0021e4         0x12
  .text.QF_noTimeEvtsActive
-                  0x00183c         0x12 build/default/production/_ext/1396818886/qte_arm.o
-                  0x00183c                  _QF_noTimeEvtsActive
+                  0x0021e4         0x12 build/default/production/_ext/1396818886/qte_arm.o
+                  0x0021e4                  _QF_noTimeEvtsActive
 
 .text.SYSTEM_Initialize
-                  0x00184e         0x12
+                  0x0021f6         0x12
  .text.SYSTEM_Initialize
-                  0x00184e         0x12 build/default/production/mcc_generated_files/mcc.o
-                  0x00184e                  _SYSTEM_Initialize
+                  0x0021f6         0x12 build/default/production/mcc_generated_files/mcc.o
+                  0x0021f6                  _SYSTEM_Initialize
 
 .text.BSP_randomSeed
-                  0x001860          0xe
+                  0x002208          0xe
  .text.BSP_randomSeed
-                  0x001860          0xe build/default/production/_ext/1360920944/bsp.o
-                  0x001860                  _BSP_randomSeed
+                  0x002208          0xe build/default/production/_ext/1360920944/bsp.o
+                  0x002208                  _BSP_randomSeed
 
 .text.QActive_stop
-                  0x00186e          0xe
+                  0x002216          0xe
  .text.QActive_stop
-                  0x00186e          0xe build/default/production/_ext/1396818886/qvanilla.o
-                  0x00186e                  _QActive_stop
+                  0x002216          0xe build/default/production/_ext/1396818886/qvanilla.o
+                  0x002216                  _QActive_stop
 
 .text.use_failsafe_stack
-                  0x00187c          0xe
+                  0x002224          0xe
  .text.use_failsafe_stack
-                  0x00187c          0xe build/default/production/mcc_generated_files/traps.o
+                  0x002224          0xe build/default/production/mcc_generated_files/traps.o
 
-.text.QHsm_top    0x00188a          0xc
+.text.QHsm_top    0x002232          0xc
  .text.QHsm_top
-                  0x00188a          0xc build/default/production/_ext/633907107/qhsm_top.o
-                  0x00188a                  _QHsm_top
+                  0x002232          0xc build/default/production/_ext/633907107/qhsm_top.o
+                  0x002232                  _QHsm_top
 
 .text.Q_onAssert
-                  0x001896          0xa
+                  0x00223e          0xa
  .text.Q_onAssert
-                  0x001896          0xa build/default/production/_ext/1360920944/bsp.o
-                  0x001896                  _Q_onAssert
+                  0x00223e          0xa build/default/production/_ext/1360920944/bsp.o
+                  0x00223e                  _Q_onAssert
 
-.text.QF_stop     0x0018a0          0xa
- .text.QF_stop    0x0018a0          0xa build/default/production/_ext/1396818886/qvanilla.o
-                  0x0018a0                  _QF_stop
+.text.QF_stop     0x002248          0xa
+ .text.QF_stop    0x002248          0xa build/default/production/_ext/1396818886/qvanilla.o
+                  0x002248                  _QF_stop
 
 .text.BSP_terminate
-                  0x0018aa          0x8
+                  0x002252          0x8
  .text.BSP_terminate
-                  0x0018aa          0x8 build/default/production/_ext/1360920944/bsp.o
-                  0x0018aa                  _BSP_terminate
+                  0x002252          0x8 build/default/production/_ext/1360920944/bsp.o
+                  0x002252                  _BSP_terminate
 
 .text.BSP_displayPaused
-                  0x0018b2          0x8
+                  0x00225a          0x8
  .text.BSP_displayPaused
-                  0x0018b2          0x8 build/default/production/_ext/1360920944/bsp.o
-                  0x0018b2                  _BSP_displayPaused
+                  0x00225a          0x8 build/default/production/_ext/1360920944/bsp.o
+                  0x00225a                  _BSP_displayPaused
 
 .text.QF_onIdle
-                  0x0018ba          0x8
+                  0x002262          0x8
  .text.QF_onIdle
-                  0x0018ba          0x8 build/default/production/_ext/1360920944/bsp.o
-                  0x0018ba                  _QF_onIdle
+                  0x002262          0x8 build/default/production/_ext/1360920944/bsp.o
+                  0x002262                  _QF_onIdle
 
 .text.QEP_getVersion
-                  0x0018c2          0x8
+                  0x00226a          0x8
  .text.QEP_getVersion
-                  0x0018c2          0x8 build/default/production/_ext/633907107/qep.o
-                  0x0018c2                  _QEP_getVersion
+                  0x00226a          0x8 build/default/production/_ext/633907107/qep.o
+                  0x00226a                  _QEP_getVersion
 
 .text.QF_getVersion
-                  0x0018ca          0x8
+                  0x002272          0x8
  .text.QF_getVersion
-                  0x0018ca          0x8 build/default/production/_ext/1396818886/qf_act.o
-                  0x0018ca                  _QF_getVersion
+                  0x002272          0x8 build/default/production/_ext/1396818886/qf_act.o
+                  0x002272                  _QF_getVersion
 
 .text.TRAPS_halt_on_error
-                  0x0018d2          0x8
+                  0x00227a          0x8
  .text.TRAPS_halt_on_error
-                  0x0018d2          0x8 build/default/production/mcc_generated_files/traps.o
-                  0x0018d2                  _TRAPS_halt_on_error
+                  0x00227a          0x8 build/default/production/mcc_generated_files/traps.o
+                  0x00227a                  _TRAPS_halt_on_error
 
 .text.QF_onCleanup
-                  0x0018da          0x6
+                  0x002282          0x6
  .text.QF_onCleanup
-                  0x0018da          0x6 build/default/production/_ext/1360920944/bsp.o
-                  0x0018da                  _QF_onCleanup
+                  0x002282          0x6 build/default/production/_ext/1360920944/bsp.o
+                  0x002282                  _QF_onCleanup
 
-.text.QF_init     0x0018e0          0x6
- .text.QF_init    0x0018e0          0x6 build/default/production/_ext/1396818886/qvanilla.o
-                  0x0018e0                  _QF_init
+.text.QF_init     0x002288          0x6
+ .text.QF_init    0x002288          0x6 build/default/production/_ext/1396818886/qvanilla.o
+                  0x002288                  _QF_init
 
 .text.INTERRUPT_Initialize
-                  0x0018e6          0x6
+                  0x00228e          0x6
  .text.INTERRUPT_Initialize
-                  0x0018e6          0x6 build/default/production/mcc_generated_files/interrupt_manager.o
-                  0x0018e6                  _INTERRUPT_Initialize
+                  0x00228e          0x6 build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x00228e                  _INTERRUPT_Initialize

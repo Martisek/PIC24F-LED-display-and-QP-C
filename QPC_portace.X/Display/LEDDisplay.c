@@ -25,7 +25,7 @@ QActive *AO_LEDDisplay = &LEDDisplay.super;
  * 
  */ 
 
-void DisplayCtor(void);
+void DisplayCtor(void); // Public function prototype
 
 static QState Display_Init(DisplayDriver *me, QEvt const *e);
 static QState Display_Active(DisplayDriver *me, QEvt const *e);
@@ -38,6 +38,7 @@ static QState Display_Paused(DisplayDriver *me, QEvt const *e);
 
 
 static void Double_dabble(DisplayDriver *me, uint16_t binvalue);
+static LEDDD_State LDD_Char2SegmentConvert(char value);
 
 
 #ifdef MYDEBUG
@@ -67,11 +68,12 @@ void DisplayCtor(void) {
 
 static QState Display_Init(DisplayDriver *me, QEvent const *e) {
     (void)e;
+    LEDDLightOFF();
     me->DarkTime = DARK_TIMEOUT;
-    me->digitvalue.ones = '0';
-    me->digitvalue.tens = '0';
-    me->digitvalue.hundreds = '0';
-    me->digitvalue.thousands = '0';
+    me->digitvalue.ones = '9';
+    me->digitvalue.tens = '5';
+    me->digitvalue.hundreds = '6';
+    me->digitvalue.thousands = '4';
     return Q_TRAN(&Display_Active);
 }
 
@@ -85,7 +87,7 @@ static QState Display_Active(DisplayDriver *me, QEvt const *e) {
     
     switch (e->sig) {
         case Q_ENTRY_SIG: {
-            QTimeEvt_postEvery(&me->timeTickEvent, &me->super, BSP_TICKS_PER_SEC/50);
+            QTimeEvt_postEvery(&me->timeTickEvent, &me->super, BSP_TICKS_PER_SEC/500);
             state = Q_HANDLED();
             break;
         }
@@ -290,7 +292,7 @@ static QState Display_SegThousands(DisplayDriver *me, QEvt const *e) {
         }
    
     }
-    return Q_IGNORED();
+    return state;
 }
 
 /*..............................................................................
@@ -398,10 +400,8 @@ void Double_dabble(DisplayDriver *me, uint16_t binvalue)
     return;
 }
 
-LEDDD_State LDD_Char2SegmentConvert(char value)
-{
-    switch (value)
-    {
+static LEDDD_State LDD_Char2SegmentConvert(char value) {
+    switch (value) {
         case '0':   LDD_SHOW_0();
                     return LEDDD_OK;
                     
