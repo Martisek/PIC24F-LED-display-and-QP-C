@@ -136,11 +136,10 @@
                                 PORTB = LATB | LDD_MASK_DARK_PB;\
                              } else ((void)0)
 
-    #define LEDDAnodeOnes()     ((PORTBbits.RB11) = (unsigned)0)
-    #define LEDDAnodeTens()     ((PORTBbits.RB13) = (unsigned)0)
-    #define LEDDAnodeHundreds() ((PORTAbits.RA7)  = (unsigned)0)
-    #define LEDDAnodeThousands()((PORTBbits.RB15) = (unsigned)0)
-
+    #define LEDDAnodeOnes()     ((PORTBbits.RB15) = (unsigned)0)
+    #define LEDDAnodeTens()     ((PORTAbits.RA7)  = (unsigned)0)
+    #define LEDDAnodeHundreds() ((PORTBbits.RB13) = (unsigned)0)
+    #define LEDDAnodeThousands()((PORTBbits.RB11) = (unsigned)0)
    
     /*========================================================================*/
    

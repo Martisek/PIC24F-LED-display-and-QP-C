@@ -4,15 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/mcc_generated_files/mcc.c</file>
-            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/port/qf_port.h</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Display/LEDDisplay.c</file>
-            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/bsp/bsp.h</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Display/LEDDisplay.h</file>
-            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Blinking/Blinky.c</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/bsp/bsp.c</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/main.c</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Display/LDD_BSP.h</file>
-            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Blinking/Blinky.h</file>
+            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/mcc_generated_files/uart1.c</file>
+            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/qf/source/qvanilla.c</file>
         </group>
     </open-files>
 </project-private>

@@ -67,9 +67,15 @@ int main(void)
     static const QEvt *blinkySto[10];
     static const QEvt *displaySto[10];
     
-    
+    char *TextString = "Ahoj MCU...\n";
     // initialize the device
     SYSTEM_Initialize();
+    
+    while (*TextString != 0) {
+        UART1_Write(*TextString);
+        TextString++;
+    }
+    
     BSP_init();
     BlinkyCtor();
     DisplayCtor();
