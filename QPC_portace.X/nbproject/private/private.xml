@@ -5,12 +5,15 @@
         <group>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/mcc_generated_files/mcc.c</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Display/LEDDisplay.c</file>
+            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/bsp/bsp.h</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Display/LEDDisplay.h</file>
+            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Keyboard/Keyboard.h</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/bsp/bsp.c</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/main.c</file>
+            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Keyboard/Keyboard.c</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Display/LDD_BSP.h</file>
             <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/mcc_generated_files/uart1.c</file>
-            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/qf/source/qvanilla.c</file>
+            <file>file:/C:/Users/PC1/Desktop/Konstrukce/Minutka/Firmware/Development/QPC_portace/QPC_portace.X/Blinking/Blinky.h</file>
         </group>
     </open-files>
 </project-private>

@@ -48,6 +48,7 @@
 #include "Blinking/Blinky.h"
 #include "../bsp/bsp.h"
 #include "Display/LEDDisplay.h"
+#include "../QPC_portace.X/Keyboard/Keyboard.h"
 #include "qp_port.h"
 /*
                          Main application
@@ -56,6 +57,8 @@
  */
 
 extern QActive *AO_LEDDisplay;
+extern QActive *AO_Keyboard2Button;
+
 
 /*..............................................................................
 *
@@ -66,8 +69,11 @@ int main(void)
 {
     static const QEvt *blinkySto[10];
     static const QEvt *displaySto[10];
+    static const QEvt *keyboardSto[10];
+    static int medPoolSto[20];
     
     char *TextString = "Ahoj MCU...\n";
+    KeyboardMsg myMsg;
     // initialize the device
     SYSTEM_Initialize();
     
@@ -78,14 +84,19 @@ int main(void)
     
     BSP_init();
     BlinkyCtor();
+    KeyboardCtor();
     DisplayCtor();
     
     QF_init();
     
-    QActive_start(AO_Blinky,     1U, blinkySto,  Q_DIM(blinkySto),  (void*)0, 0U, (QEvt*)0);
-    QActive_start(AO_LEDDisplay, 3U, displaySto, Q_DIM(displaySto), (void*)0, 0U, (QEvt*)0);
+    QF_poolInit(medPoolSto, sizeof(medPoolSto), sizeof(medPoolSto[0]));
     
-    QF_run();
+    QActive_start(AO_Blinky,         2U, blinkySto,   Q_DIM(blinkySto),  (void*)0, 0U, (QEvt*)0);
+    QActive_start(AO_LEDDisplay,     3U, displaySto,  Q_DIM(displaySto), (void*)0, 0U, (QEvt*)0);
+    QActive_start(AO_Keyboard2Button,1U, keyboardSto, Q_DIM(keyboardSto),(void*)0, 0U, (QEvt*)0);
+    
+    
+    QF_run();   // Run QP framework.
 
     return -1;
 }

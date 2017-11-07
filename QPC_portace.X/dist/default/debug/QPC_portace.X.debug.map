@@ -58,15 +58,15 @@ Command:
   build/default/debug/mcc_generated_files/interrupt_manager.o \
   build/default/debug/mcc_generated_files/mcc.o \
   build/default/debug/mcc_generated_files/pin_manager.o \
-  build/default/debug/main.o \
   build/default/debug/mcc_generated_files/uart1.o \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.00 \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.01 \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.02 \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.03 \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.04 \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.05 \
-  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001024.06 \
+  build/default/debug/main.o \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.00 \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.01 \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.02 \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.03 \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.04 \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.05 \
+  -TC:\\Users\\PC1\\AppData\\Local\\Temp\\tmp00001278.06 \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   --defsym=__MPLAB_DEBUG=1 \
@@ -535,8 +535,8 @@ LOAD build/default/debug/mcc_generated_files/traps.o
 LOAD build/default/debug/mcc_generated_files/interrupt_manager.o
 LOAD build/default/debug/mcc_generated_files/mcc.o
 LOAD build/default/debug/mcc_generated_files/pin_manager.o
-LOAD build/default/debug/main.o
 LOAD build/default/debug/mcc_generated_files/uart1.o
+LOAD build/default/debug/main.o
 
 reserve_data_0x800
                     0x0800         0x1c
@@ -699,8 +699,8 @@ __CONFIG1
  .debug_info      0x00b589        0x10d build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_info      0x00b696        0x240 build/default/debug/mcc_generated_files/mcc.o
  .debug_info      0x00b8d6        0x691 build/default/debug/mcc_generated_files/pin_manager.o
- .debug_info      0x00bf67        0x426 build/default/debug/main.o
- .debug_info      0x00c38d        0x7cd build/default/debug/mcc_generated_files/uart1.o
+ .debug_info      0x00bf67        0x7cd build/default/debug/mcc_generated_files/uart1.o
+ .debug_info      0x00c734        0x426 build/default/debug/main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000       0x273d
@@ -748,8 +748,8 @@ __CONFIG1
  .debug_abbrev    0x002400         0x34 build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_abbrev    0x002434         0x6a build/default/debug/mcc_generated_files/mcc.o
  .debug_abbrev    0x00249e         0xc9 build/default/debug/mcc_generated_files/pin_manager.o
- .debug_abbrev    0x002567         0xbe build/default/debug/main.o
- .debug_abbrev    0x002625        0x118 build/default/debug/mcc_generated_files/uart1.o
+ .debug_abbrev    0x002567        0x118 build/default/debug/mcc_generated_files/uart1.o
+ .debug_abbrev    0x00267f         0xbe build/default/debug/main.o
 
 .debug_line       0x000000       0x2c8d
  *(.debug_line)
@@ -796,8 +796,8 @@ __CONFIG1
  .debug_line      0x002817         0x55 build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_line      0x00286c        0x116 build/default/debug/mcc_generated_files/mcc.o
  .debug_line      0x002982         0xc5 build/default/debug/mcc_generated_files/pin_manager.o
- .debug_line      0x002a47         0xfa build/default/debug/main.o
- .debug_line      0x002b41        0x14c build/default/debug/mcc_generated_files/uart1.o
+ .debug_line      0x002a47        0x14c build/default/debug/mcc_generated_files/uart1.o
+ .debug_line      0x002b93         0xfa build/default/debug/main.o
 
 .debug_frame      0x000000        0xc86
  *(.debug_frame)
@@ -842,8 +842,8 @@ __CONFIG1
  .debug_frame     0x000b18         0x30 build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_frame     0x000b48         0x4c build/default/debug/mcc_generated_files/mcc.o
  .debug_frame     0x000b94         0x30 build/default/debug/mcc_generated_files/pin_manager.o
- .debug_frame     0x000bc4         0x3e build/default/debug/main.o
- .debug_frame     0x000c02         0x84 build/default/debug/mcc_generated_files/uart1.o
+ .debug_frame     0x000bc4         0x84 build/default/debug/mcc_generated_files/uart1.o
+ .debug_frame     0x000c48         0x3e build/default/debug/main.o
 
 .debug_str        0x000000        0x439
  *(.debug_str)
@@ -876,8 +876,8 @@ __CONFIG1
  .debug_str       0x0003ce          0xc build/default/debug/mcc_generated_files/traps.o
  .debug_str       0x0003da         0x1c build/default/debug/mcc_generated_files/mcc.o
  .debug_str       0x0003f6         0x16 build/default/debug/mcc_generated_files/pin_manager.o
- .debug_str       0x00040c         0x18 build/default/debug/main.o
- .debug_str       0x000424         0x15 build/default/debug/mcc_generated_files/uart1.o
+ .debug_str       0x00040c         0x15 build/default/debug/mcc_generated_files/uart1.o
+ .debug_str       0x000421         0x18 build/default/debug/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -975,9 +975,9 @@ __CONFIG1
  .debug_pubnames
                   0x000935         0x2d build/default/debug/mcc_generated_files/pin_manager.o
  .debug_pubnames
-                  0x000962         0x1b build/default/debug/main.o
+                  0x000962         0x5a build/default/debug/mcc_generated_files/uart1.o
  .debug_pubnames
-                  0x00097d         0x5a build/default/debug/mcc_generated_files/uart1.o
+                  0x0009bc         0x1b build/default/debug/main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1067,9 +1067,9 @@ __CONFIG1
  .debug_aranges
                   0x000630         0x20 build/default/debug/mcc_generated_files/pin_manager.o
  .debug_aranges
-                  0x000650         0x20 build/default/debug/main.o
+                  0x000650         0x38 build/default/debug/mcc_generated_files/uart1.o
  .debug_aranges
-                  0x000670         0x38 build/default/debug/mcc_generated_files/uart1.o
+                  0x000688         0x20 build/default/debug/main.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -2498,9 +2498,9 @@ LOAD data_init
  .debug_pubtypes
                   0x002600         0x54 build/default/debug/mcc_generated_files/pin_manager.o
  .debug_pubtypes
-                  0x002654         0xc3 build/default/debug/main.o
+                  0x002654         0x6f build/default/debug/mcc_generated_files/uart1.o
  .debug_pubtypes
-                  0x002717         0x6f build/default/debug/mcc_generated_files/uart1.o
+                  0x0026c3         0xc3 build/default/debug/main.o
 
 __c30_signature
                   0x002786        0x120
@@ -2591,9 +2591,9 @@ __c30_signature
  __c30_signature
                   0x002882          0x6 build/default/debug/mcc_generated_files/pin_manager.o
  __c30_signature
-                  0x002888          0x6 build/default/debug/main.o
+                  0x002888          0x6 build/default/debug/mcc_generated_files/uart1.o
  __c30_signature
-                  0x00288e          0x6 build/default/debug/mcc_generated_files/uart1.o
+                  0x00288e          0x6 build/default/debug/main.o
  __c30_signature
                   0x002894          0x6 c:/program files (x86)/microchip/xc16/v1.31/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
  __c30_signature
