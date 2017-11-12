@@ -92,6 +92,7 @@ static QState Display_Active(DisplayDriver *me, QEvt const *e) {
             break;
         }
         case Q_EXIT_SIG: {
+            trulyDisArmed = QTimeEvt_disarm(&me->timeTickEvent);
             state = Q_HANDLED();
             break;
         }
@@ -105,6 +106,7 @@ static QState Display_Active(DisplayDriver *me, QEvt const *e) {
         }
         case LDD_NEW_VAL_SIG: {
             Double_dabble(me, ((DisplayEvent*)e)->value);
+            // Double_dabble(me, 1234);
             state = Q_HANDLED();
             break;
         }
@@ -360,14 +362,15 @@ static QState Display_OFF(DisplayDriver *me, QEvt const *e) {
 /**==========================================================================**/
 
 /* Algorithm for BIN to BCD conversion */
-void Double_dabble(DisplayDriver *me, uint16_t binvalue)
+static void Double_dabble(DisplayDriver *me, uint16_t binvalue)
 {
     char scratch[6] = {0, 0, 0, 0, 0, 0};
     int j, k;
     int smin = NSCRATCH-2;    /* speed optimization */
     char *accessptr;
 
-    accessptr = (char*)me;
+    accessptr = (char*)&me->digitvalue;
+    
 
     for (j = 0; j < 16; ++j)
         {
@@ -395,7 +398,7 @@ void Double_dabble(DisplayDriver *me, uint16_t binvalue)
 
     /* Certain output creating */
     for (k = 0; k < NSCRATCH; k++)
-       *(accessptr + 3 + k) = scratch[4-k] + '0';
+       *(accessptr + k) = scratch[4-k] + '0';
 
     return;
 }

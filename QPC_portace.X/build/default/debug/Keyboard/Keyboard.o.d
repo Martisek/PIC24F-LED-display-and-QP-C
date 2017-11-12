@@ -1,4 +1,4 @@
-build/default/production/Keyboard/Keyboard.o:  \
+build/default/debug/Keyboard/Keyboard.o:  \
 Keyboard/Keyboard.c  \
  Keyboard/Keyboard.h  \
 ../include/qp_port.h  \

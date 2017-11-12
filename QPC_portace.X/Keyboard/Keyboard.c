@@ -12,6 +12,7 @@
 
 
 #include "Keyboard.h"
+#include "../Display/LEDDisplay.h"
 
 char DebugInfo[35];
 
@@ -53,6 +54,10 @@ static QState Keyboard_fastRepet(KeyboardDriver *me, QEvt const *e);
 
 void hotCallbackFunction(void);
 
+static QEvt const LDDOnMsg  = {LDD_ON_SIG,  0, 0};
+static QEvt const LDDOffMsg = {LDD_OFF_SIG, 0, 0};
+static DisplayEvent SetNewValEvt;
+
 /**................................................................................................
  * 
  * @brief   void KeyboardCtor(void).
@@ -87,6 +92,8 @@ static QState Keyboard_init(KeyboardDriver *me, QEvt const *e) {
 	me->hotCode = 3;
 	me->callBackFcn = &hotCallbackFunction;
 	me->lastPortValue = 0;
+    
+    memset(&SetNewValEvt, 0, sizeof(SetNewValEvt));
     
     #if (KEYBOARD_DEBUG)
         memcpy(DebugInfo, KbdInitString, strlen(KbdInitString));
@@ -267,9 +274,15 @@ static QState Keyboard_pressed(KeyboardDriver *me, QEvt const *e) {
                 memcpy(DebugInfo, KbdPresString, strlen(KbdPresString));
             #endif
             keyPressedVal = me->lastPortValue >> me->keyShift;
-            //KeyboardMsg *kbdMsg = Q_NEW();
-            //kbdMsg->keySignal = keyPressedVal;
-            //kbdMsg->PorR = KEY_PRESSED;
+            KeyboardMsg *kbdMsg = Q_NEW(KeyboardMsg, KEYBOARD_NEWVAL_SIG);
+            kbdMsg->keySignal = keyPressedVal;
+            kbdMsg->PorR = KEY_PRESSED;
+            QF_publish((QEvt*)kbdMsg);
+            
+            //QActive_postFIFO(AO_LEDDisplay, &LDDOffMsg);
+            SetNewValEvt.super.sig = LDD_NEW_VAL_SIG;
+            SetNewValEvt.value = 1234;
+            QActive_postFIFO(AO_LEDDisplay, (QEvt*)&SetNewValEvt);
             
             me->kbdCounters.repdlyCounter = REPETICE_DLY(2);
 
@@ -322,6 +335,8 @@ static QState Keyboard_slowRepet(KeyboardDriver *me, QEvt const *e) {
 
 	switch (e->sig) {
 		case Q_ENTRY_SIG: {
+            QEvt LDDOffMsg;
+            
             #if (KEYBOARD_DEBUG)              
                 memcpy(DebugInfo, KbdSlRpString, strlen(KbdSlRpString));
             #endif
@@ -332,6 +347,7 @@ static QState Keyboard_slowRepet(KeyboardDriver *me, QEvt const *e) {
             //KeyboardMsg *kbdMsg = Q_NEW();
             //kbdMsg->keySignal = keyPressedVal;
             //kbdMsg->PorR = KEY_PRESSED;
+      
             state =  Q_HANDLED();
             break;
         }
@@ -441,15 +457,20 @@ static QState Keyboard_released(KeyboardDriver *me, QEvt const *e) {
             #if (KEYBOARD_DEBUG)
                 memcpy(DebugInfo, KbdRelsString, strlen(KbdRelsString));
             #endif
+
             keyPressedVal = me->lastPortValue >> me->keyShift;
             //KeyboardMsg *kbdMsg = Q_NEW();
             //kbdMsg->keySignal = keyPressedVal;
             //kbdMsg->PorR = KEY_RELEASED;
+            
+            // QActive_postFIFO(AO_LEDDisplay, &LDDOnMsg);
+            
             state = Q_HANDLED();
             break;
         }
         case KEYBOARD_TICK_SIG: {
 			state = Q_TRAN(&Keyboard_scanning);
+            break;
         }
 		case Q_EXIT_SIG: {
 			state = Q_HANDLED();

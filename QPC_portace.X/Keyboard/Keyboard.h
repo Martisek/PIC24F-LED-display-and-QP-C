@@ -28,18 +28,19 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
+#ifndef KEYBOARD_H
+#define	KEYBOARD_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include "qp_port.h"
 #include "../../bsp/bsp.h"
 
 
-#define KEYBOARD_DEBUG  0
+#define KEYBOARD_DEBUG  1
 
 
 #define TMR_TICK_MS     5
@@ -121,5 +122,5 @@ void KeyboardCtor(void);
  */
 extern QActive *AO_Keyboard2Button;
 
-#endif	/* XC_HEADER_TEMPLATE_H */
+#endif	/* KEYBOARD_H */
 

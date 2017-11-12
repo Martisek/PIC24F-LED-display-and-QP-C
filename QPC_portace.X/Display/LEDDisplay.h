@@ -83,7 +83,7 @@ struct DisplayDriver {
 
 struct DisplayEvent {
     QEvt super;
-    uint16_t value;
+    uint16_t value __attribute__ ((aligned (4)));
 };
 
 /*..............................................................................

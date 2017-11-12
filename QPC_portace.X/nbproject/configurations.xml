@@ -35,6 +35,9 @@
                    displayName="Linker Files"
                    projectFiles="true">
     </logicalFolder>
+    <logicalFolder name="QP_common" displayName="QP_common" projectFiles="true">
+      <itemPath>QP_common/QP_common.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="include" displayName="QP_include" projectFiles="true">
       <itemPath>../include/qassert.h</itemPath>
       <itemPath>../include/qep.h</itemPath>
@@ -131,6 +134,7 @@
     <Elem>Display</Elem>
     <Elem>Blinking</Elem>
     <Elem>Keyboard</Elem>
+    <Elem>QP_common</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -142,7 +146,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PKOBSKDEPlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.31</languageToolchainVersion>
+        <languageToolchainVersion>1.33</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -272,7 +276,7 @@
         <property key="secure-flash" value="no_flash"/>
         <property key="secure-ram" value="no_ram"/>
         <property key="secure-write-protect" value="no_write_protect"/>
-        <property key="stack-size" value="128"/>
+        <property key="stack-size" value="256"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>
@@ -297,6 +301,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="memories.configurationmemory" value="true"/>
         <property key="memories.dataflash" value="true"/>
         <property key="memories.eeprom" value="true"/>
